@@ -49,7 +49,7 @@ const Header = () => {
           {/* Header Nav */}
           <div>
             <ul className="flex space-x-2">
-              <li className="list-none inline-block">
+              <li className="list-none hidden md:inline-block">
                 <button
                   className={cn(
                     "inline-block relative z-[1] overflow-hidden group px-4 py-3 backdrop-blur bg-white/15 text-white font-outfit rounded-none uppercase text-sm font-medium tracking-wider ",

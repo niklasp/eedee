@@ -30,8 +30,36 @@ export function BackgroundFollow() {
   }, []);
 
   const { coolcursor } = useCoolCursor();
+  // React to viewport changes (disappear/appear on resize)
+  const [isDisabledOnDevice, setIsDisabledOnDevice] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const onChange = (e: MediaQueryListEvent) =>
+      setIsDisabledOnDevice(e.matches);
+    setIsDisabledOnDevice(mql.matches);
+    if (typeof mql.addEventListener === "function")
+      mql.addEventListener("change", onChange);
+    else
+      (
+        mql as MediaQueryList & {
+          addListener?: (listener: (e: MediaQueryListEvent) => void) => void;
+        }
+      ).addListener?.(onChange);
+    return () => {
+      if (typeof mql.removeEventListener === "function")
+        mql.removeEventListener("change", onChange);
+      else
+        (
+          mql as MediaQueryList & {
+            removeListener?: (
+              listener: (e: MediaQueryListEvent) => void
+            ) => void;
+          }
+        ).removeListener?.(onChange);
+    };
+  }, []);
 
-  if (!coolcursor) return null;
+  if (!coolcursor || isDisabledOnDevice) return null;
 
   return (
     <div className="fixed inset-0 z-20 pointer-events-none mix-blend-difference text-white">
