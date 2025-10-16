@@ -1,10 +1,6 @@
 import React from "react";
 import { awardsData } from "@/lib/siteData";
-import {
-  FlutedGlass,
-  GodRays,
-  MeshGradient,
-} from "@paper-design/shaders-react";
+import { MeshGradient } from "@paper-design/shaders-react";
 
 const Awards = () => {
   return (

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { contactData } from "@/lib/siteData";
+import { toast } from "sonner";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ export default function Contact() {
   >("idle");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -32,11 +33,17 @@ export default function Contact() {
       if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
+        toast.success("Message sent successfully");
       } else {
         setStatus("error");
+        const { message } = await response
+          .json()
+          .catch(() => ({ message: "Something went wrong" }));
+        toast.error(message || "Something went wrong");
       }
     } catch {
       setStatus("error");
+      toast.error("Network error. Please try again.");
     }
   };
 

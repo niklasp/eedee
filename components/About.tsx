@@ -1,40 +1,24 @@
 import React from "react";
 import Image from "next/image";
-import { Suspense } from "react";
-import { AvatarSphere } from "./three/avatar-sphere";
+
 import Link from "next/link";
 import { aboutData } from "@/lib/siteData";
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
 import { doto } from "@/app/fonts";
+import { ParallaxAvatar } from "@/components/parallax-avatar";
 
 const About = () => {
   return (
     <div className="lg:flex space-y-8 lg:space-y-0">
       {/* Hero Avatar */}
       <div className="w-full lg:w-1/3 lg:order-2 text-center">
-        {/* <Suspense
-          fallback={
-            <Image
-              src={aboutData.mainData.heroAvatar}
-              alt="hero avatar"
-              placeholder="blur"
-              className="inline-block w-[240px] h-[240px] md:w-[270px] md:h-[270px] xl:w-[320px] xl:h-[320px] rounded-full"
-            />
-          }
-        >
-          <AvatarSphere
-            textureUrl={
-              (aboutData.mainData.heroAvatar as any).src ??
-              "/images/niftesty.jpg"
-            }
-          />
-        </Suspense> */}
-        <Image
+        <ParallaxAvatar
           src={aboutData.mainData.heroAvatar}
           alt="hero avatar"
           placeholder="blur"
-          className="inline-block w-[240px] h-[240px] md:w-[270px] md:h-[270px] xl:w-[320px] xl:h-[320px] rounded-full"
+          className="inline-block w-[120px] h-[120px] md:w-[150px] md:h-[150px] xl:w-[200px] xl:h-[200px] rounded-full mt-24"
+          maxTranslateY={80}
         />
       </div>
       {/* end Hero Avatar */}
@@ -57,16 +41,19 @@ const About = () => {
                 <Badge
                   className={cn(
                     "bg-white/15 text-white cursor-default flex items-center gap-1 text-lg",
-                    doto.className,
+                    doto.className
                   )}
                 >
                   {item.icon && (
-                    <Image
-                      src={item.icon}
-                      alt={item.name}
-                      width={14}
-                      height={14}
-                    />
+                    <span className="flex items-center shrink-0 w-4 [&_img]:w-12 [&_img]:h-auto [&_svg]:w-4 [&_svg]:h-4">
+                      <Image
+                        src={item.icon}
+                        alt={item.name}
+                        width={14}
+                        height={12}
+                        className="saturate-0"
+                      />
+                    </span>
                   )}{" "}
                   {item.name}
                 </Badge>
@@ -102,7 +89,7 @@ const About = () => {
       <div
         className={cn(
           "w-full lg:w-1/3 order-3 grid grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-7 lg:text-right",
-          doto.className,
+          doto.className
         )}
       >
         <div>

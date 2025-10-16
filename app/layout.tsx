@@ -9,10 +9,12 @@ import "glightbox/dist/css/glightbox.min.css";
 import { seoData } from "@/lib/seoData";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
 import ScrollToTop from "@/components/ScrollToTop";
-import { doto, fontIBMPlexMono } from "./fonts";
+import { fontIBMPlexMono } from "./fonts";
 import { BackgroundFollow } from "@/components/three/background-follow";
+import { CoolCursorProvider } from "@/components/cool-cursor-context";
+import { BodyCursorController } from "@/components/body-cursor-controller";
+import { AppToaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: seoData.home.title,
@@ -34,22 +36,26 @@ export default function RootLayout({
       <body
         className={`bg-black ${fontIBMPlexMono.className} overflow-x-hidden text-[14px]`}
       >
-        {/* Background 3D scene */}
-        <BackgroundFollow />
+        <CoolCursorProvider defaultOn>
+          <BodyCursorController />
+          {/* Background 3D scene */}
+          <BackgroundFollow />
 
-        {/* Header */}
-        <Header />
+          {/* Header */}
+          <Header />
 
-        {children}
+          {children}
 
-        {/* Footer */}
-        <Footer />
+          {/* Footer */}
+          <Footer />
 
-        {/* Scroll to Top */}
-        <ScrollToTop />
+          {/* Scroll to Top */}
+          <ScrollToTop />
 
-        {/* Cursor */}
-        {/* <Cursor /> */}
+          {/* Cursor */}
+          {/* <Cursor /> */}
+        </CoolCursorProvider>
+        <AppToaster />
       </body>
     </html>
   );

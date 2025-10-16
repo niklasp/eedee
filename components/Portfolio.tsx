@@ -8,7 +8,7 @@ import { portfolioData } from "@/lib/siteData";
 import { Swiper as SwiperType } from "swiper";
 import { NavigationOptions } from "swiper/types";
 import { cn } from "@/lib/utils";
-import { fontFiraMono, fontNovaMono, fontIBMPlexMono } from "@/app/fonts";
+import { fontIBMPlexMono } from "@/app/fonts";
 
 const Portfolio = () => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
@@ -53,7 +53,7 @@ const Portfolio = () => {
             <p
               className={cn(
                 "leading-[1.75] text-white/70 mt-3 font-light",
-                fontIBMPlexMono.className,
+                fontIBMPlexMono.className
               )}
             >
               {portfolioData.mainData.description}

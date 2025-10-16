@@ -3,10 +3,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { headerData } from "@/lib/siteData";
+import { useCoolCursor } from "@/components/cool-cursor-context";
+import { MousePointer } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const { coolcursor, setCoolcursor } = useCoolCursor();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,7 +35,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="z-10 fixed top-0 left-0 w-full py-5">
+    <div className="z-10 fixed top-0 left-0 w-full py-5 ">
       {/* Progressive linear backdrop blur overlay (no radial) */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 backdrop-blur-[12px] [mask-image:linear-gradient(to_bottom,black_0%,black_28%,black_50%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_28%,black_72%,transparent_100%)]" />
@@ -46,8 +50,26 @@ const Header = () => {
           <div>
             <ul className="flex space-x-2">
               <li className="list-none inline-block">
+                <button
+                  className={cn(
+                    "inline-block relative z-[1] overflow-hidden group px-4 py-3 backdrop-blur bg-white/15 text-white font-outfit rounded-none uppercase text-sm font-medium tracking-wider ",
+                    coolcursor
+                      ? "bg-white text-black"
+                      : " bg-white/15 text-white"
+                  )}
+                  onClick={() => setCoolcursor(!coolcursor)}
+                >
+                  <MousePointer
+                    className="size-4"
+                    strokeWidth={1.5}
+                    stroke={coolcursor ? "black" : "white"}
+                    size={24}
+                  />
+                </button>
+              </li>
+              <li className="list-none inline-block">
                 <Link
-                  className="inline-block relative z-[1] overflow-hidden group px-5 py-2.5 pr-[34px] backdrop-blur bg-white/15 text-white font-outfit rounded-none uppercase text-sm font-medium tracking-wider before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-white after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7]"
+                  className="inline-block relative z-[1] overflow-hidden group px-5 py-2.5 pr-[34px] backdrop-blur bg-themeGradient text-white font-outfit rounded-none uppercase text-sm font-medium tracking-wider before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-white after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7]"
                   href="/#contact"
                 >
                   <span

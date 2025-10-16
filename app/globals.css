@@ -159,6 +159,11 @@
   }
 }
 
+html.coolcursor *,
+body.coolcursor * {
+  cursor: none !important;
+}
+
 h1,
 h2,
 h3,
@@ -166,8 +171,4 @@ h4,
 h5,
 h6 {
   @apply font-doto;
-}
-
-* {
-  cursor: none !important;
 }

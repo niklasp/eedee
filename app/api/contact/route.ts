@@ -1,43 +1,100 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+// Ensure Node.js runtime (nodemailer is not supported on Edge runtime)
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-    if (request.method === 'POST') {
+  try {
+    const body = await request.json().catch(() => null);
+    if (!body)
+      return NextResponse.json(
+        { message: "Invalid JSON body" },
+        { status: 400 }
+      );
 
-        const { name, email, subject, message } = await request.json();
+    const { name, email, subject, message } = body as {
+      name?: string;
+      email?: string;
+      subject?: string;
+      message?: string;
+    };
 
-        // Create a transporter using SMTP
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: parseInt(process.env.SMTP_PORT || '587'),
-            secure: process.env.SMTP_SECURE === 'true',
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD,
-            },
-        });
-
-        try {
-            // Send email
-            await transporter.sendMail({
-                from: email,
-                to: process.env.CONTACT_EMAIL,
-                subject: 'New Contact Form Submission',
-                text: message,
-                html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-            });
-
-            return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
-        } catch {
-            return NextResponse.json({ message: 'Error sending email' }, { status: 500 });
-        }
-    } else {
-        return NextResponse.json({ message: `Method ${request.method} Not Allowed` }, { status: 405 });
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
     }
+
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpPort = parseInt(process.env.SMTP_PORT || "587", 10);
+    const smtpSecure = process.env.SMTP_SECURE === "true" || smtpPort === 465;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASSWORD;
+    const contactEmail = process.env.CONTACT_EMAIL;
+
+    if (!smtpHost || !smtpUser || !smtpPass || !contactEmail) {
+      console.error("SMTP config missing", {
+        hasHost: !!smtpHost,
+        port: smtpPort,
+        hasUser: !!smtpUser,
+        hasPass: !!smtpPass,
+        hasContact: !!contactEmail,
+      });
+      return NextResponse.json(
+        { message: "Email service misconfigured" },
+        { status: 500 }
+      );
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: { user: smtpUser, pass: smtpPass },
+    });
+
+    const safeSubject =
+      subject && subject.trim().length > 0
+        ? `[Contact eedee.net] ${subject}`
+        : "New Contact Form Submission eedee.net";
+    const textBody = `Name: ${name}\nEmail: ${email}\nSubject: ${subject || "(none)"}\n\n${message}`;
+    const htmlBody = `
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Subject:</strong> ${escapeHtml(subject || "(none)")}</p>
+            <p><strong>Message:</strong></p>
+            <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
+        `;
+
+    await transporter.sendMail({
+      from: `Website Contact <${contactEmail}>`,
+      to: contactEmail,
+      replyTo: email,
+      subject: safeSubject,
+      text: textBody,
+      html: htmlBody,
+    });
+
+    return NextResponse.json(
+      { message: "Email sent successfully" },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("Error sending email", err);
+    return NextResponse.json(
+      { message: "Error sending email" },
+      { status: 500 }
+    );
+  }
+}
+
+function escapeHtml(value: string) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

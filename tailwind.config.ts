@@ -71,9 +71,21 @@ export default {
             opacity: "0",
           },
         },
+        "parallax-avatar": {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         loader: "loaderLetter 1.0s linear infinite",
+        "parallax-avatar": "parallax-avatar 5.0s ease-in-out infinite",
       },
       borderRadius: {
         lg: "var(--radius)",

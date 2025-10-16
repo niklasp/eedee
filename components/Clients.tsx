@@ -20,7 +20,7 @@ const Clients = () => {
             <span
               className={cn(
                 "flex items-center shrink-0 w-32 [&_img]:w-32 [&_img]:h-auto [&_svg]:w-32 [&_svg]:h-auto",
-                client.name && "!w-auto !h-12",
+                client.name && "!w-auto !h-12"
               )}
             >
               {client.logo ?? null}

@@ -24,7 +24,7 @@ export async function generateMetadata({
   const seo = getPortfolioProjectSEO(
     slug,
     project.title,
-    project.description as string,
+    project.description as string
   );
 
   return {
@@ -58,7 +58,7 @@ export default async function PortfolioProject({
 
   // Find the index of the current project
   const currentProjectIndex = portfolioData.projects.findIndex(
-    (p) => p.slug === slug,
+    (p) => p.slug === slug
   );
 
   // Determine previous and next projects
@@ -78,6 +78,8 @@ export default async function PortfolioProject({
 
   // Get the last word from project.title
   const lastWord = getLastWord(project.title);
+  const wideImage = project.wideImage;
+  const mainImage = project.mainImage;
 
   return (
     <GalleryWrapper>
@@ -147,15 +149,27 @@ export default async function PortfolioProject({
         <div className="container mx-auto max-w-[1320px] px-5">
           <div className="md:mx-auto md:w-3/4 lg:w-2/3">{project.content}</div>
 
-          <div className="mt-6 lg:mt-12">
-            <Image
-              className="rounded-none"
-              src={project.wideImage}
-              alt={project.title}
-              loading="lazy"
-              placeholder="blur"
-            />
-          </div>
+          {mainImage && (
+            <div className="mt-6 lg:mt-12">
+              <Image
+                className="rounded-none"
+                src={mainImage}
+                alt={project.title}
+              />
+            </div>
+          )}
+
+          {wideImage && (
+            <div className="mt-6 lg:mt-12">
+              <Image
+                className="rounded-none"
+                src={wideImage}
+                alt={project.title}
+                loading="lazy"
+                placeholder="blur"
+              />
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 mt-6 lg:mt-12">
             {/* Lightbox Image */}

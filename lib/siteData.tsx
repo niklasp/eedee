@@ -2,8 +2,7 @@ import HeroAvatar from "@/public/images/niftesty.png";
 import BlogImg from "@/public/images/blog-img.jpg";
 import BlogImg2x from "@/public/images/blog-img@2x.jpg";
 import BlogImgWide from "@/public/images/blog-img-wide.jpg";
-import PortfolioImg from "@/public/images/portfolio-img.jpg";
-import PortfolioImgWide from "@/public/images/portfolio-img-wide.jpg";
+
 import TestimonialAvatar from "@/public/images/testimonial-avatar.jpg";
 import Image from "next/image";
 
@@ -11,13 +10,17 @@ import LogoKus from "@/public/customers/kusamarian.webp";
 import LogoWagMedia from "@/public/customers/wagmedia-logo.png";
 import LogoInk from "@/public/customers/ink.svg";
 import LogoPop from "@/public/customers/pop.png";
+import LogoHyperbridge from "@/public/customers/hyperbridge.svg";
 
 import PortfolioPolkadotUI from "@/public/projects/polkadot-ui.png";
 import PortfolioInk from "@/public/projects/ink.png";
+import PortfolioWagMedia from "@/public/projects/wagmedia.png";
+import PortfolioDistrict from "@/public/projects/district.png";
+import PortfolioEsmalbesserhabenin from "@/public/projects/esmalbesserhabenin.png";
+import PortfolioGrayPaperLecture from "@/public/projects/gray-paper.png";
 import Link from "next/link";
 
 import skillRust from "@/public/skills/rust.svg";
-import skillInk from "@/public/skills/ink.svg";
 import skillFramer from "@/public/skills/framer.svg";
 import skillShadcn from "@/public/skills/shadcnui.svg";
 import skillTailwind from "@/public/skills/tailwindcss.svg";
@@ -44,14 +47,14 @@ export const headerData = {
       url: "/#awards",
       title: "Awards",
     },
-    {
-      url: "/#testimonial",
-      title: "Testimonial",
-    },
-    {
-      url: "/#blog",
-      title: "Blog",
-    },
+    // {
+    //   url: "/#testimonial",
+    //   title: "Testimonial",
+    // },
+    // {
+    //   url: "/#blog",
+    //   title: "Blog",
+    // },
     {
       url: "/#contact",
       title: "Contact",
@@ -61,20 +64,23 @@ export const headerData = {
 
 export const aboutData = {
   mainData: {
-    name: "I ship performant and enjoyable interfaces for web3",
+    name: "I ship outstanding and enjoyable interfaces and apps for web3",
     heroAvatar: HeroAvatar,
     biography: (
       <>
-        Fullstack Web3 Developer with a passion for building innovative and
+        Fullstack Web3 Developer with a passion for building innovative
+        solutions. Strong{" "}
         <span className="bg-themeGradient bg-clip-text text-transparent">
-          {" enjoyable "}
-        </span>
-        solutions.
+          {" frontend "}
+        </span>{" "}
+        focus. Master Degree in History of Science, Bachelor in Computer
+        Science. Freelancing and building for creatives since 2005. Throwing
+        black clay espresso cups at the pottery wheel in my free time.
       </>
     ),
     projectsDone: "35+",
     yearsOfExperience: "15",
-    worldwideClients: "30+",
+    worldwideClients: "25+",
   },
   skills: [
     {
@@ -117,7 +123,7 @@ export const aboutData = {
       name: "Framer",
     },
     {
-      name: "UI/UX Design",
+      name: "UX Research",
     },
     {
       icon: skillTailwind,
@@ -126,6 +132,9 @@ export const aboutData = {
     {
       icon: skillShadcn,
       name: "shadcn",
+    },
+    {
+      name: "Open Source",
     },
   ],
   connect: [
@@ -181,7 +190,7 @@ export const servicesData = {
 export const clientsData = {
   clients: [
     {
-      url: "https://www.parity.io/",
+      url: "https://parity.io/",
       logo: (
         <svg
           width="127"
@@ -217,7 +226,7 @@ export const clientsData = {
       ),
     },
     {
-      url: "https://www.braille.wtf/",
+      url: "https://braille.wtf/",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -268,27 +277,17 @@ export const clientsData = {
     },
     {
       url: "https://use.ink/",
+      logo: <Image src={LogoInk} alt="ink! logo" width={60} height={60} />,
+    },
+    {
+      url: "https://hyperbridge.network",
       logo: (
-        <Image
-          src={LogoInk}
-          alt="ink! logo"
-          width={60}
-          height={60}
-          className="saturate-0"
-        />
+        <Image src={LogoHyperbridge} alt="Hyperbridge" width={60} height={60} />
       ),
     },
     {
       url: "https://onpop.io/",
-      logo: (
-        <Image
-          src={LogoPop}
-          alt="pop"
-          width={60}
-          height={60}
-          className="saturate-0"
-        />
-      ),
+      logo: <Image src={LogoPop} alt="pop" width={60} height={60} />,
     },
     {
       url: "https://thekus.xyz/",
@@ -298,7 +297,7 @@ export const clientsData = {
           alt="Kusamarian"
           width={60}
           height={60}
-          className="saturate-0 !w-auto !h-12"
+          className="!w-auto !h-12"
         />
       ),
       name: "TheKUS",
@@ -377,15 +376,15 @@ export const portfolioData = {
         </p>
       ),
       mainImage: PortfolioPolkadotUI,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioImg,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: true,
     },
     {
@@ -405,7 +404,7 @@ export const portfolioData = {
       client: "ink! alliance",
       duration: "180 hours",
       projectLink: {
-        title: "www.use.ink",
+        title: "use.ink",
         url: "https://use.ink",
       },
       content: (
@@ -418,143 +417,189 @@ export const portfolioData = {
         </p>
       ),
       mainImage: PortfolioInk,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioImg,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: true,
     },
     {
-      title: "Project Title 3",
-      slug: "project-title-3",
+      title: "District",
+      slug: "district",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit",
+        "Dapp for the District, a community driven 3d Music experience in the LUKSO ecosystem.",
       keywords: "key1, key2, key3",
       categories: [
-        { name: "Category" },
-        { name: "Category" },
-        { name: "Category" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Figma" },
+        { name: "Shadcn" },
+        { name: "LUKSO" },
       ],
-      services: [{ name: "Item" }, { name: "Item" }],
-      client: "FlaTheme",
-      duration: "235 Hours",
+      services: [
+        { name: "Web Development" },
+        { name: "UX Design" },
+        { name: "Music Player" },
+      ],
+      client: "District",
+      duration: "6 months",
       projectLink: {
-        title: "www.flatheme.net",
-        url: "https://www.flatheme.net",
+        title: "district.berlin",
+        url: "https://district.berlin",
       },
-      content:
-        '<p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <h5 class="text-2xl font-outfit font-medium text-white mt-6 mb-2">Heading</h5> <p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-      mainImage: PortfolioImg,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+      content: (
+        <>
+          <p className="text-white/70">
+            Created a webapp matching the new branding from figma. Highlights
+            include a responsive music player and subtle animations.
+          </p>{" "}
+        </>
+      ),
+      mainImage: PortfolioDistrict,
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioImg,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: true,
     },
     {
-      title: "Project Title 4",
-      slug: "project-title-4",
+      title: "WagMedia Website",
+      slug: "the-wag-media",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit",
-      keywords: "key1, key2, key3",
+        "Content Creation Platform for the WagMedia team. Discord bot for collecting content as well as payment emojis and populating a postgres database. Statistics.",
+      keywords: "Discord, Bot, Postgres, Statistics",
       categories: [
-        { name: "Category" },
-        { name: "Category" },
-        { name: "Category" },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "Polkadot" },
       ],
-      services: [{ name: "Item" }, { name: "Item" }],
-      client: "FlaTheme",
-      duration: "235 Hours",
+      services: [{ name: "Web Development" }, { name: "Components" }],
+      client: "WagMedia",
+      duration: "120+ Hours",
       projectLink: {
-        title: "www.flatheme.net",
-        url: "https://www.flatheme.net",
+        title: "thewagmedia.com",
+        url: "https://www.thewagmedia.com",
       },
-      content:
-        '<p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <h5 class="text-2xl font-outfit font-medium text-white mt-6 mb-2">Heading</h5> <p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-      mainImage: PortfolioImg,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+      content: (
+        <>
+          <p className="text-white/70">
+            Content Creation Platform for the WagMedia team. Discord bot for
+            collecting content as well as payment emojis and populating a
+            postgres database. Statistics.
+          </p>{" "}
+          <h5 className="text-2xl font-outfit font-medium text-white mt-6 mb-2">
+            Heading
+          </h5>{" "}
+          <p className="text-white/70">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioWagMedia,
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioWagMedia,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: true,
     },
     {
-      title: "Project Title 5",
-      slug: "project-title-5",
+      title: "Gray Paper Lectures",
+      slug: "gray-paper-lecture",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit",
-      keywords: "key1, key2, key3",
-      categories: [
-        { name: "Category" },
-        { name: "Category" },
-        { name: "Category" },
-      ],
-      services: [{ name: "Item" }, { name: "Item" }],
-      client: "FlaTheme",
-      duration: "235 Hours",
+        "Created a lectures subpage about the JAM Gray Paper by Gavin Wood. ",
+      keywords: "JAM, Gray Paper, Gavin Wood, Lectures",
+      categories: [{ name: "React" }, { name: "Figma" }, { name: "Netlify" }],
+      content: (
+        <>
+          <p className="text-white/70">
+            Created a lectures subpage about the JAM Gray Paper by Gavin Wood.
+            It matches the existing style and you can view videos alongside
+            reading the pdf of the gray paper. The page is hosted on Netlify.
+          </p>
+        </>
+      ),
+      services: [{ name: "Web Development" }, { name: "UX Design" }],
       projectLink: {
-        title: "www.flatheme.net",
-        url: "https://www.flatheme.net",
+        title: "graypaper.com/lectures",
+        url: "https://graypaper.com/lectures/?section=1.1-Nomenclature",
       },
-      content:
-        '<p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <h5 class="text-2xl font-outfit font-medium text-white mt-6 mb-2">Heading</h5> <p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-      mainImage: PortfolioImg,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+
+      mainImage: PortfolioGrayPaperLecture,
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioImg,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: false,
     },
     {
-      title: "Project Title 6",
-      slug: "project-title-6",
+      title: "Esmalbesserhabenin",
+      slug: "esmalbesserhabenin",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit",
-      keywords: "key1, key2, key3",
-      categories: [
-        { name: "Category" },
-        { name: "Category" },
-        { name: "Category" },
+        "Created a 3D web experience for a anti-racist theater play about immigration in Germany, that originally took place during the covid lockdown 2021. The producer wanted to port it into the virtual space to reach a larger audience.",
+      keywords: "3D, Web Experience, Anti-Racist, Theater Play, Immigration",
+      categories: [{ name: "React" }, { name: "Figma" }, { name: "Shadcn" }],
+      services: [
+        { name: "Web Development" },
+        { name: "UX Design" },
+        { name: "3D" },
       ],
-      services: [{ name: "Item" }, { name: "Item" }],
-      client: "FlaTheme",
-      duration: "235 Hours",
+      client: "Esmalbesserhabenin",
+      duration: "1 month",
       projectLink: {
-        title: "www.flatheme.net",
-        url: "https://www.flatheme.net",
+        title: "esmalbesserhabenin.de",
+        url: "https://www.esmalbesserhabenin.de",
       },
-      content:
-        '<p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> <h5 class="text-2xl font-outfit font-medium text-white mt-6 mb-2">Heading</h5> <p class="text-white/70">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-      mainImage: PortfolioImg,
-      wideImage: PortfolioImgWide,
-      imagesLightbox: {
-        image: PortfolioImg,
-        alt: "Image Alt",
-      },
-      video: {
-        thumbnail: PortfolioImg,
-        url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      },
+      content: (
+        <>
+          <p>
+            Created a 3D web experience for a anti-racist theater play about
+            immigration in Germany, that originally took place during the covid
+            lockdown 2021. The producer wanted to port it into the virtual space
+            to reach a larger audience.
+          </p>
+          <p>
+            We created the UI + UX together with the team of producers and
+            dramaturgists.
+          </p>
+        </>
+      ),
+
+      mainImage: PortfolioEsmalbesserhabenin,
+      // wideImage: PortfolioImgWide,
+      // imagesLightbox: {
+      //   image: PortfolioImg,
+      //   alt: "Image Alt",
+      // },
+      // video: {
+      //   thumbnail: PortfolioImg,
+      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
+      // },
       trending: false,
     },
   ],
