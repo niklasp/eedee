@@ -139,16 +139,16 @@ export const aboutData = {
   ],
   connect: [
     {
-      url: "#",
-      bootstrapIcon: "bi bi-facebook",
-    },
-    {
-      url: "#",
+      url: "https://x.com/niftesty",
       bootstrapIcon: "bi bi-twitter-x",
     },
     {
-      url: "#",
-      bootstrapIcon: "bi bi-instagram",
+      url: "https://t.me/niftesty",
+      bootstrapIcon: "bi bi-telegram",
+    },
+    {
+      url: "https://www.linkedin.com/in/niklas-jurij-plessing-6b0295125",
+      bootstrapIcon: "bi bi-linkedin",
     },
   ],
 };
