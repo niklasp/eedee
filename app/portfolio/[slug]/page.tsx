@@ -78,7 +78,7 @@ export default async function PortfolioProject({
 
   // Get the last word from project.title
   const lastWord = getLastWord(project.title);
-  const wideImage = project.wideImage;
+  // const wideImage = project.wideImage??;
   const mainImage = project.mainImage;
 
   return (
@@ -158,7 +158,7 @@ export default async function PortfolioProject({
               />
             </div>
           )}
-
+          {/* 
           {wideImage && (
             <div className="mt-6 lg:mt-12">
               <Image
@@ -169,11 +169,11 @@ export default async function PortfolioProject({
                 placeholder="blur"
               />
             </div>
-          )}
+          )} */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 mt-6 lg:mt-12">
-            {/* Lightbox Image */}
-            {project.imagesLightbox && (
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 mt-6 lg:mt-12"> */}
+          {/* Lightbox Image */}
+          {/* {project.imagesLightbox && (
               <div className="overflow-hidden rounded-none">
                 <a
                   href={project.imagesLightbox.image.src}
@@ -196,7 +196,7 @@ export default async function PortfolioProject({
             )}
 
             {/* Lightbox Video */}
-            {project.video && (
+          {/* {project.video && (
               <div className="overflow-hidden rounded-none">
                 <a
                   href={project.video.url}
