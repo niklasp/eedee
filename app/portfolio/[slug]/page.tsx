@@ -225,14 +225,14 @@ export default async function PortfolioProject({
             {/* Prev */}
             {prevProject ? (
               <Link
-                href={`/portfolio/${prevProject.slug}`}
+                href={`/portfolio/${nextProject?.slug}`}
                 className="inline-block relative z-[1] group overflow-hidden bg-white/15 px-7 py-3 rounded-none font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100"
               >
                 <span
                   className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 group-hover:before:-top-full group-hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 group-hover:after:top-0 group-hover:after:opacity-100"
-                  data-text="Prev Project"
+                  data-text="Previous Project"
                 >
-                  Prev Project
+                  Previous Project
                 </span>
               </Link>
             ) : (
@@ -249,7 +249,7 @@ export default async function PortfolioProject({
             {/* Next */}
             {nextProject ? (
               <Link
-                href={`/portfolio/${nextProject.slug}`}
+                href={`/portfolio/${prevProject?.slug}`}
                 className="inline-block relative z-[1] group overflow-hidden bg-white/15 px-7 py-3 rounded-none font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100"
               >
                 <span

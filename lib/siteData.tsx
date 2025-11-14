@@ -18,6 +18,7 @@ import PortfolioWagMedia from "@/public/projects/wagmedia.png";
 import PortfolioDistrict from "@/public/projects/district.png";
 import PortfolioEsmalbesserhabenin from "@/public/projects/esmalbesserhabenin.png";
 import PortfolioGrayPaperLecture from "@/public/projects/gray-paper.png";
+import PortfolioR0GUE from "@/public/projects/r0gue.png";
 import Link from "next/link";
 
 import skillRust from "@/public/skills/rust.svg";
@@ -332,6 +333,47 @@ export const portfolioData = {
   },
   projects: [
     {
+      title: "R0GUE",
+      slug: "r0gue",
+      description: (
+        <p className="text-white/70">
+          R0GUE is a web3 agency that helps businesses build and scale their
+          web3 projects. I built the website from a figma design, adding motion
+          and shaders for a more enjoyable experience.
+        </p>
+      ),
+      keywords: "next.js, tailwindcss, framer motion, shaders, figma",
+      categories: [
+        { name: "Next.js" },
+        { name: "Tailwind CSS" },
+        { name: "Framer Motion" },
+        { name: "Shaders" },
+        { name: "Figma" },
+      ],
+      services: [
+        { name: "Web Development" },
+        { name: "UX Design" },
+        { name: "Project Management" },
+      ],
+      client: "R0GUE",
+      duration: "100+ hours",
+      projectLink: {
+        title: "r0gue.com",
+        url: "https://r0gue.com",
+      },
+      content: (
+        <p className="text-white/70">
+          After several iterations in designs and discussions with the client,
+          we settled on a design with shaders in the main heroes matching the
+          brand by distorting the R0GUE figure. I added controls for the client
+          so they can easily adjust the shaders to their liking.
+        </p>
+      ),
+      mainImage: PortfolioR0GUE,
+      trending: true,
+    },
+
+    {
       title: "Polkadot UI",
       slug: "polkadot-ui",
       description: (
@@ -376,15 +418,6 @@ export const portfolioData = {
         </p>
       ),
       mainImage: PortfolioPolkadotUI,
-      // wideImage: PortfolioImgWide,
-      // imagesLightbox: {
-      //   image: PortfolioImg,
-      //   alt: "Image Alt",
-      // },
-      // video: {
-      //   thumbnail: PortfolioImg,
-      //   url: "https://www.youtube.com/watch?v=V8yu12uRpBA",
-      // },
       trending: true,
     },
     {
