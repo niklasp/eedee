@@ -140,6 +140,10 @@ export const aboutData = {
   ],
   connect: [
     {
+      url: "https://github.com/niklasp",
+      bootstrapIcon: "bi bi-github",
+    },
+    {
       url: "https://x.com/niftesty",
       bootstrapIcon: "bi bi-twitter-x",
     },
