@@ -362,8 +362,8 @@ export const portfolioData = {
       client: "R0GUE",
       duration: "100+ hours",
       projectLink: {
-        title: "r0gue.com",
-        url: "https://r0gue.com",
+        title: "r0gue.io",
+        url: "https://r0gue.io",
       },
       content: (
         <p className="text-white/70">
