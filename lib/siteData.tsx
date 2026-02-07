@@ -65,11 +65,11 @@ export const headerData = {
 
 export const aboutData = {
   mainData: {
-    name: "I ship outstanding and enjoyable interfaces and apps for web3",
+    name: "I ship outstanding and enjoyable interfaces and apps",
     heroAvatar: HeroAvatar,
     biography: (
       <>
-        Fullstack Web3 Developer with a passion for building innovative
+        Senior Fullstack Web3 Developer with a passion for building innovative
         solutions. Strong{" "}
         <span className="bg-themeGradient bg-clip-text text-transparent">
           {" frontend "}
