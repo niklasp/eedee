@@ -12,6 +12,7 @@ export function ParallaxAvatar({
   maxScale = 1.1,
   placeholder,
   sizes,
+  children,
 }: ParallaxAvatarProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -63,21 +64,26 @@ export function ParallaxAvatar({
         ref={innerRef}
         className="transition-transform ease-out duration-200"
       >
-        <Image
-          src={src}
-          alt={alt}
-          placeholder={placeholder}
-          sizes={sizes}
-          className={cn(className)}
-        />
+        {children ??
+          (src && (
+            <Image
+              src={src}
+              alt={alt ?? ""}
+              placeholder={placeholder}
+              sizes={sizes}
+              className={cn(className)}
+            />
+          ))}
       </div>
     </div>
   );
 }
 
 interface ParallaxAvatarProps {
-  src: string | StaticImageData;
-  alt: string;
+  /** An image, or `children` to float instead. */
+  src?: string | StaticImageData;
+  alt?: string;
+  children?: React.ReactNode;
   className?: string;
   maxTranslateY?: number;
   maxScale?: number;
