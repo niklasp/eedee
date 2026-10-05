@@ -3,28 +3,32 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * True once the element comes within `margin` of the viewport (then stays
- * true), so heavy things such as WebGL shaders load only when needed.
+ * Watches an element against the viewport, grown by `margin`.
+ * - `near`: true once the element has come within `margin` (then stays true),
+ *   so heavy things such as WebGL shaders load only when needed.
+ * - `inView`: whether it is within `margin` right now, so they can pause
+ *   once scrolled away.
  */
 export function useNearViewport<T extends Element>(margin = "600px 0px") {
   const ref = useRef<T | null>(null);
   const [near, setNear] = useState(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || near) return;
+    if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setNear(true);
-          io.disconnect();
-        }
+        const entry = entries[entries.length - 1];
+        if (!entry) return;
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) setNear(true);
       },
       { rootMargin: margin }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [near, margin]);
+  }, [margin]);
 
-  return [ref, near] as const;
+  return { ref, near, inView };
 }

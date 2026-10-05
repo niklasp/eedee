@@ -1,4 +1,4 @@
-import { aboutData, portfolioData } from "@/lib/siteData";
+import { aboutData, contactData, portfolioData } from "@/lib/siteData";
 import {
   absoluteUrl,
   founderName,
@@ -14,12 +14,15 @@ const orgId = `${siteUrl}/#organization`;
 const founderId = `${siteUrl}/#founder`;
 const websiteId = `${siteUrl}/#website`;
 
-/** Own plugins that are a free download on WordPress.org (slug = wp.org slug). */
-const freeOnWordPressOrg = ["wisp-gallery"];
-
-/** Projects eedee makes and sells itself (client "eedee (own product)"). */
+/** Projects eedee makes and sells itself (`ownProduct: true` in siteData). */
 export const isOwnProduct = (project: Project) =>
-  "client" in project && /own product/i.test(project.client ?? "");
+  "ownProduct" in project && project.ownProduct === true;
+
+/** The WordPress.org plugin slug, for own plugins listed there. */
+const wpOrgSlug = (project: Project) =>
+  "wpOrgSlug" in project && typeof project.wpOrgSlug === "string"
+    ? project.wpOrgSlug
+    : undefined;
 
 export function founderJsonLd() {
   return {
@@ -47,7 +50,7 @@ export function organizationJsonLd() {
     image: absoluteUrl("/opengraph-image"),
     slogan: studioTagline,
     description: homeDescription,
-    email: "hello@eedee.net",
+    email: contactData.mainData.email,
     founder: { "@id": founderId },
     sameAs: ["https://profiles.wordpress.org/eedee/"],
     knowsAbout: aboutData.skills.map((s) => s.name),
@@ -100,21 +103,21 @@ export function projectJsonLd(project: Project) {
     "client" in project && project.client && !isOwnProduct(project)
       ? project.client
       : undefined;
+  const slug = wpOrgSlug(project);
   const main = isOwnProduct(project)
     ? {
         "@type": "SoftwareApplication",
         ...common,
-        applicationCategory: "WebApplication",
+        applicationCategory: "DeveloperApplication",
         applicationSubCategory: "WordPress plugin",
         operatingSystem: "WordPress",
         author: { "@id": orgId },
         publisher: { "@id": orgId },
-        // Only Wisp Gallery is listed as a free download for now.
-        ...(freeOnWordPressOrg.includes(project.slug)
-          ? {
-              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              downloadUrl: `https://wordpress.org/plugins/${project.slug}/`,
-            }
+        // Both plugins have a free version. No aggregateRating/review here:
+        // add them only once there are real ratings to show.
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        ...(slug
+          ? { downloadUrl: `https://wordpress.org/plugins/${slug}/` }
           : {}),
       }
     : {

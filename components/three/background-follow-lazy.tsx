@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useCoolCursor } from "@/components/cool-cursor-context";
+import { usePrefersReducedMotion } from "@/components/use-prefers-reduced-motion";
 
 // three.js, drei, postprocessing and the cursor model are only fetched on
 // screens that show the 3D cursor, and only once the page is idle, so they
@@ -20,9 +21,11 @@ type IdleWindow = Window & {
 export function LazyBackgroundFollow() {
   const { coolcursor } = useCoolCursor();
   const [load, setLoad] = useState(false);
+  // Reduced motion: no 3D cursor at all, so the system cursor stays too.
+  const still = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (!coolcursor || load) return;
+    if (!coolcursor || still || load) return;
     const w = window as IdleWindow;
     if (w.requestIdleCallback) {
       const id = w.requestIdleCallback(() => setLoad(true), { timeout: 3000 });
@@ -30,7 +33,7 @@ export function LazyBackgroundFollow() {
     }
     const id = window.setTimeout(() => setLoad(true), 1500);
     return () => window.clearTimeout(id);
-  }, [coolcursor, load]);
+  }, [coolcursor, still, load]);
 
-  return load ? <BackgroundFollow /> : null;
+  return load && !still ? <BackgroundFollow /> : null;
 }

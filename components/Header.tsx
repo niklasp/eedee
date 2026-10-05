@@ -13,8 +13,10 @@ const Header = () => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { coolcursor, setCoolcursor } = useCoolCursor();
 
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((open) => !open);
   };
 
   const closeMenu = () => {
@@ -22,18 +24,27 @@ const Header = () => {
   };
 
   useEffect(() => {
+    if (!isMenuOpen) return;
+    // Clicks outside close the menu; the Menu button toggles it itself.
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        closeMenu();
-      }
+      const target = event.target as Node;
+      if (menuRef.current?.contains(target)) return;
+      if (buttonRef.current?.contains(target)) return;
+      setIsMenuOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setIsMenuOpen(false);
+      buttonRef.current?.focus();
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isMenuOpen]);
 
   return (
     <div className="z-10 fixed top-0 left-0 w-full py-5 ">
@@ -95,9 +106,11 @@ const Header = () => {
               <li className="list-none inline-block">
                 {/* Nav Menu Toggle */}
                 <button
+                  ref={buttonRef}
                   type="button"
                   onClick={toggleMenu}
                   aria-expanded={isMenuOpen}
+                  aria-controls="site-menu"
                   aria-label="Menu"
                   className="inline-block relative z-[1] overflow-hidden cursor-pointer group px-5 py-2.5 pr-[34px] bg-white text-black font-outfit rounded-none uppercase text-sm font-medium tracking-wider after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-black after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7] cursor-link"
                 >
@@ -114,6 +127,8 @@ const Header = () => {
           {/* Nav Menu Box */}
           <nav
             ref={menuRef}
+            id="site-menu"
+            aria-label="Main"
             className={`nav-box absolute overflow-hidden invisible opacity-0 translate-y-[5px] top-[60px] right-0 bg-white/10 px-7 py-6 min-w-[250px] rounded-none font-outfit text-xl backdrop-blur transition-all ease-linear duration-100 before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-30 ${isMenuOpen ? "show" : ""}`}
           >
             <ul className="space-y-[10px]">
@@ -121,6 +136,7 @@ const Header = () => {
                 <li key={idx} className="list-none">
                   <Link
                     href={item.url}
+                    onClick={closeMenu}
                     className="text-white block relative hover:pl-[26px] transition-all ease-out duration-300 group"
                   >
                     <i aria-hidden="true" className="bi bi-arrow-right absolute top-1/2 left-0 -translate-y-1/2 opacity-0 invisible transition-all ease-linear duration-100 group-hover:opacity-100 group-hover:visible"></i>

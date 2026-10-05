@@ -7,6 +7,7 @@ import { Vector3, Euler, Color } from "three";
 import { useGLTF, Edges } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useCoolCursor } from "@/components/cool-cursor-context";
+import { useMediaQuery } from "@/components/use-media-query";
 
 export function BackgroundFollow() {
   const targetRef = useRef({ x: 0, y: 0 });
@@ -31,33 +32,7 @@ export function BackgroundFollow() {
 
   const { coolcursor } = useCoolCursor();
   // React to viewport changes (disappear/appear on resize)
-  const [isDisabledOnDevice, setIsDisabledOnDevice] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    const onChange = (e: MediaQueryListEvent) =>
-      setIsDisabledOnDevice(e.matches);
-    setIsDisabledOnDevice(mql.matches);
-    if (typeof mql.addEventListener === "function")
-      mql.addEventListener("change", onChange);
-    else
-      (
-        mql as MediaQueryList & {
-          addListener?: (listener: (e: MediaQueryListEvent) => void) => void;
-        }
-      ).addListener?.(onChange);
-    return () => {
-      if (typeof mql.removeEventListener === "function")
-        mql.removeEventListener("change", onChange);
-      else
-        (
-          mql as MediaQueryList & {
-            removeListener?: (
-              listener: (e: MediaQueryListEvent) => void
-            ) => void;
-          }
-        ).removeListener?.(onChange);
-    };
-  }, []);
+  const isDisabledOnDevice = useMediaQuery("(max-width: 767px)");
 
   if (!coolcursor || isDisabledOnDevice) return null;
 

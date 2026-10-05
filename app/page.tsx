@@ -7,6 +7,20 @@ import { IntroBackground } from "@/components/intro-background";
 import Portfolio from "@/components/Portfolio";
 import Services from "@/components/Services";
 import { homeJsonLd, jsonLdString } from "@/lib/structuredData";
+import type { Metadata } from "next";
+import { homeDescription, homeTitle, siteName } from "@/lib/seoData";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName,
+    title: homeTitle,
+    description: homeDescription,
+    locale: "en_US",
+  },
+};
 
 export default function Home() {
   return (

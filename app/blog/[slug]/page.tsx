@@ -29,10 +29,12 @@ export async function generateMetadata({
     keywords: seo.keywords,
     // The blog only holds placeholder posts for now.
     robots: { index: false, follow: true },
+    alternates: { canonical: seo.canonicalUrl },
     openGraph: {
       title: seo.title,
       description: seo.description,
       type: "article",
+      url: seo.canonicalUrl,
       authors: [post.postedBy],
     },
     twitter: {

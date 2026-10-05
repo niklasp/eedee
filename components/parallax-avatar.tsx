@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
+import { usePrefersReducedMotion } from "@/components/use-prefers-reduced-motion";
 
 export function ParallaxAvatar({
   src,
@@ -17,11 +18,17 @@ export function ParallaxAvatar({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
+  // Reduced motion: no float, no scroll parallax.
+  const still = usePrefersReducedMotion();
 
   useEffect(() => {
     const container = containerRef.current;
     const inner = innerRef.current;
     if (!container || !inner) return;
+    if (still) {
+      inner.style.transform = "";
+      return;
+    }
 
     const update = () => {
       const rect = container.getBoundingClientRect();
@@ -53,12 +60,15 @@ export function ParallaxAvatar({
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
     };
-  }, [maxTranslateY, maxScale]);
+  }, [maxTranslateY, maxScale, still]);
 
   return (
     <div
       ref={containerRef}
-      className="relative inline-block will-change-transform animate-parallax-avatar"
+      className={cn(
+        "relative inline-block",
+        !still && "will-change-transform animate-parallax-avatar"
+      )}
     >
       <div
         ref={innerRef}

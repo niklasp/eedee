@@ -22,22 +22,18 @@ import { AppToaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: homeTitle,
-    template: `%s`,
-  },
+  // Pages set their full title themselves ("Project | eedee").
+  title: homeTitle,
   description: homeDescription,
   keywords: homeKeywords,
   authors: [{ name: founderName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
   applicationName: siteName,
-  alternates: {
-    canonical: "/",
-  },
+  // Canonical and og:url are set per page (home: app/page.tsx), so other
+  // routes don't inherit the home page's.
   openGraph: {
     type: "website",
-    url: "/",
     siteName,
     title: homeTitle,
     description: homeDescription,

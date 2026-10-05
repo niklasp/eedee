@@ -355,6 +355,9 @@ export const portfolioData = {
     {
       title: "Wisp Gallery",
       slug: "wisp-gallery",
+      // eedee's own plugin; free download on WordPress.org under this slug.
+      ownProduct: true,
+      wpOrgSlug: "wisp-gallery",
       description:
         "Filterable galleries for the WordPress block editor. Five layouts, a category filter and a native lightbox, built on core blocks and the Interactivity API with 3 KB of JavaScript to start. Free on WordPress.org.",
       keywords:
@@ -423,6 +426,9 @@ export const portfolioData = {
     {
       title: "Gutenslider",
       slug: "gutenslider",
+      // eedee's own plugin. Not on WordPress.org right now (closed there
+      // pending re-review), so no wpOrgSlug.
+      ownProduct: true,
       description:
         "A slider block for the WordPress block editor: images, videos or colors as slide backgrounds and any blocks on top. Version 7 rebuilt the front end on the Interactivity API.",
       keywords:
@@ -525,7 +531,8 @@ export const portfolioData = {
       slug: "polkadot-ui",
       description:
         "Customizable React Component library for building Polkadot dapps. UX optimized components build on shadcn registry with a custom cli and MCP server.",
-      keywords: "key1, key2, key3",
+      keywords:
+        "polkadot, react component library, dapp ui, shadcn registry, next.js, cli, mcp server",
       categories: [
         { name: "Next.js" },
         { name: "Shadcn" },
@@ -567,7 +574,8 @@ export const portfolioData = {
       slug: "ink-website",
       description:
         "Using the existing branding to create a better UX for the #1 rust smart contract language on Polkadot",
-      keywords: "key1, key2, key3",
+      keywords:
+        "ink!, rust smart contracts, polkadot, documentation, docusaurus, next.js, react",
       categories: [
         { name: "React" },
         { name: "Next.js" },
@@ -608,7 +616,8 @@ export const portfolioData = {
       slug: "district",
       description:
         "Dapp for the District, a community driven 3d Music experience in the LUKSO ecosystem.",
-      keywords: "key1, key2, key3",
+      keywords:
+        "lukso, dapp, music player, 3d music experience, next.js, react, figma",
       categories: [
         { name: "React" },
         { name: "Next.js" },
@@ -890,7 +899,7 @@ export const awardsData = {
       title: "400k Downloads WP Plugin",
       date: "2021-2024",
       description:
-        "When WordPress switched to react based Gutenberg, we were one of the first to build a slider plugin within the native editor. It has ~400k downloads today (discontinued).",
+        "When WordPress switched to react based Gutenberg, we were one of the first to build a slider plugin within the native editor. It has ~400k downloads today.",
     },
   ],
 };

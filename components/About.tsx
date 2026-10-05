@@ -11,9 +11,18 @@ import { Mark } from "@/components/brand/Mark";
 
 const About = () => {
   return (
-    <div className="lg:flex py-24 xl:py-28 space-y-8 lg:space-y-0">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="lg:flex py-24 xl:py-28 space-y-8 lg:space-y-0"
+    >
       {/* The pixel e, floating with the scroll */}
       <div className="w-full lg:w-1/3 lg:order-2 text-center">
+        {/* Section heading for assistive tech; inside the first column so
+            it doesn't add to the column spacing. */}
+        <h2 id="about-heading" className="sr-only">
+          About eedee
+        </h2>
         <ParallaxAvatar maxTranslateY={80}>
           <Mark
             title="eedee"
@@ -23,17 +32,17 @@ const About = () => {
       </div>
       <div className="w-full lg:w-1/3 lg:order-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-8">
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Founder
-          </h2>
+          </h3>
           <p className="text-white/70 leading-[1.75] font-ibm-plex-mono">
             {aboutData.mainData.biography}
           </p>
         </div>
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Skills
-          </h2>
+          </h3>
           <ul className="text-white/70 gap-1 flex flex-wrap">
             {aboutData.skills.map((item, index) => (
               <li key={index} className="list-none inline">
@@ -61,9 +70,9 @@ const About = () => {
           </ul>
         </div>
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Connect
-          </h2>
+          </h3>
           <ul className="space-x-1">
             {aboutData.connect.map((item, index) => (
               <li key={index} className="list-none inline-block">
@@ -94,31 +103,31 @@ const About = () => {
         )}
       >
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Projects Done
-          </h2>
+          </h3>
           <span className="text-4xl lg:text-5xl xl:text-6xl font-outfit font-light text-white">
             {aboutData.mainData.projectsDone}
           </span>
         </div>
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Years of Experience
-          </h2>
+          </h3>
           <span className="text-4xl lg:text-5xl xl:text-6xl font-outfit font-light text-white">
             {aboutData.mainData.yearsOfExperience}+
           </span>
         </div>
         <div>
-          <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
+          <h3 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
             Worldwide Clients
-          </h2>
+          </h3>
           <span className="text-4xl lg:text-5xl xl:text-6xl font-outfit font-light text-white">
             {aboutData.mainData.worldwideClients}
           </span>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

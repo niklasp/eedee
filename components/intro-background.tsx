@@ -1,43 +1,67 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
+import type { DitheringProps } from "@paper-design/shaders-react";
 import { useNearViewport } from "@/components/use-near-viewport";
+import { usePrefersReducedMotion } from "@/components/use-prefers-reduced-motion";
+import { useAfterLoadIdle } from "@/components/use-after-load-idle";
 
 // A slow, dithered warp in the brand violet behind the intro and Recent Work,
-// from the top of the page: square pixels like the logo. Loads and starts only near the viewport; holds still for
-// reduced motion.
-const Dithering = dynamic(
-  () => import("@paper-design/shaders-react").then((m) => m.Dithering),
-  { ssr: false }
-);
-
+// from the top of the page: square pixels like the logo. The shader code is
+// fetched and started only after the page has loaded and gone idle (it sits
+// at the top, so it would otherwise run during hydration), then fades in.
+// It pauses while scrolled away and holds still for reduced motion.
 export function IntroBackground() {
-  const [ref, near] = useNearViewport<HTMLDivElement>();
-  const [still, setStill] = useState(false);
+  const { ref, near, inView } = useNearViewport<HTMLDivElement>();
+  const still = usePrefersReducedMotion();
+  const idle = useAfterLoadIdle(near);
+  const [Shader, setShader] = useState<ComponentType<DitheringProps> | null>(
+    null
+  );
+  const [shown, setShown] = useState(false);
+  const [maxPixelCount, setMaxPixelCount] = useState(1200000);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setStill(mq.matches);
-    const onChange = () => setStill(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+    if (!idle || Shader) return;
+    let cancelled = false;
+    import("@paper-design/shaders-react").then((m) => {
+      if (cancelled) return;
+      // Phones: fewer pixels to shade, the dither looks the same.
+      setMaxPixelCount(window.innerWidth < 768 ? 400000 : 1200000);
+      setShader(() => m.Dithering);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [idle, Shader]);
+
+  // Fade in once the canvas is mounted, so it doesn't pop in.
+  useEffect(() => {
+    if (!Shader) return;
+    let id = requestAnimationFrame(() => {
+      id = requestAnimationFrame(() => setShown(true));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [Shader]);
 
   return (
     <div ref={ref} aria-hidden="true" className="absolute inset-0 -z-10">
-      {near && (
-        <Dithering
-          colorBack="#000000"
-          colorFront="#3a0f70"
-          shape="warp"
-          type="4x4"
-          size={3}
-          scale={1.7}
-          speed={still ? 0 : 0.2}
-          maxPixelCount={1200000}
-          className="absolute inset-0 w-full h-full"
-        />
+      {Shader && (
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ease-out ${shown ? "opacity-100" : "opacity-0"}`}
+        >
+          <Shader
+            colorBack="#000000"
+            colorFront="#3a0f70"
+            shape="warp"
+            type="4x4"
+            size={3}
+            scale={1.7}
+            speed={still || !inView ? 0 : 0.2}
+            maxPixelCount={maxPixelCount}
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
       )}
       {/* Even out the pattern: quieter under the header and the headline,
           fuller in the middle, fading out at the bottom. */}

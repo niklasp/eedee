@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { contactData } from "@/lib/siteData";
 import { toast } from "sonner";
 
@@ -11,6 +11,12 @@ function mailtoFallback(f: { name: string; subject: string; message: string }) {
   return `mailto:${contactData.mainData.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+/** Field styles: visible focus ring in the brand pink (WCAG 2.4.7). */
+const fieldClass =
+  "w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff82f3] aria-[invalid=true]:outline aria-[invalid=true]:outline-1 aria-[invalid=true]:outline-[#ff82f3]/60";
+
+type Field = "name" | "email" | "subject" | "message";
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,33 +25,58 @@ export default function Contact() {
     message: "",
   });
   const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
+    "idle" | "loading" | "success" | "invalid" | "error"
   >("idle");
+  // A validation problem the server reported (400), shown inline.
+  const [invalid, setInvalid] = useState<{
+    message: string;
+    field?: Field;
+  } | null>(null);
+  // Spam checks: a honeypot field people never see, and when the form
+  // appeared (bots submit within moments).
+  const [company, setCompany] = useState("");
+  const startedAt = useRef<number | null>(null);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (invalid?.field === e.target.name) setInvalid(null);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
+    setInvalid(null);
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          company,
+          startedAt: startedAt.current,
+        }),
       });
+      const { message, field } = (await response
+        .json()
+        .catch(() => ({}))) as { message?: string; field?: Field };
       if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
         toast.success("Message sent successfully");
+      } else if (response.status === 400 || response.status === 429) {
+        // Something to fix in the form, or too many tries: say what, here.
+        setStatus("invalid");
+        setInvalid({
+          message: message || "Please check the form and try again.",
+          field,
+        });
       } else {
         setStatus("error");
-        const { message } = await response
-          .json()
-          .catch(() => ({ message: "Something went wrong" }));
         toast.error(message || "Something went wrong", {
           description: "Use the email link below the form instead.",
         });
@@ -55,6 +86,11 @@ export default function Contact() {
       toast.error("Network error. Please try again.");
     }
   };
+
+  const invalidProps = (name: Field) =>
+    invalid?.field === name
+      ? { "aria-invalid": true, "aria-describedby": "contact-status" }
+      : {};
 
   return (
     <div
@@ -96,7 +132,7 @@ export default function Contact() {
               <div className="flex space-x-4">
                 <div className="w-1/2">
                   <input
-                    className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
+                    className={fieldClass}
                     type="text"
                     id="name"
                     aria-label="Name"
@@ -105,12 +141,14 @@ export default function Contact() {
                     placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
+                    maxLength={100}
                     required
+                    {...invalidProps("name")}
                   />
                 </div>
                 <div className="w-1/2">
                   <input
-                    className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
+                    className={fieldClass}
                     type="email"
                     id="email"
                     aria-label="E-Mail"
@@ -119,29 +157,35 @@ export default function Contact() {
                     placeholder="E-Mail"
                     value={formData.email}
                     onChange={handleChange}
+                    maxLength={254}
                     required
+                    {...invalidProps("email")}
                   />
                 </div>
               </div>
               <input
-                className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
+                className={fieldClass}
                 type="text"
                 id="subject"
-                    aria-label="Subject"
+                aria-label="Subject (optional)"
                 name="subject"
                 placeholder="Subject"
                 value={formData.subject}
                 onChange={handleChange}
-                required
+                maxLength={150}
+                {...invalidProps("subject")}
               />
               <textarea
-                className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 h-[160px] focus:outline-none"
+                className={`${fieldClass} h-[160px]`}
                 name="message"
                 id="message"
-                    aria-label="Message"
+                aria-label="Message"
                 placeholder="Message"
                 value={formData.message}
                 onChange={handleChange}
+                maxLength={5000}
+                required
+                {...invalidProps("message")}
               ></textarea>
               <button
                 className={`inline-block relative group overflow-hidden bg-white/15 px-7 py-3 pr-11 rounded-3xl font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 after:content-[''] after:absolute after:top-1/2 after:right-[28px] after:-translate-y-1/2 after:bg-white after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7] ${status === "loading" ? "non-disabled" : ""}`}
@@ -168,9 +212,28 @@ export default function Contact() {
                   </span>
                 )}
               </button>
+              {/* Honeypot: hidden from people and assistive tech, bots fill it. */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden"
+              >
+                <label htmlFor="company">Company</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </div>
             </form>
             {/* Submit result, announced to screen readers. */}
-            <div className="mt-4 min-h-6" aria-live="polite">
+            <div id="contact-status" className="mt-4 min-h-6" aria-live="polite">
+              {status === "invalid" && invalid && (
+                <p className="text-[#ff82f3]">{invalid.message}</p>
+              )}
               {status === "success" && (
                 <p className="text-white/80">
                   Thank you! Your message is on its way.

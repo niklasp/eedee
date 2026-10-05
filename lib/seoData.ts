@@ -39,7 +39,7 @@ export const getPortfolioProjectSEO = (
       ? keywords
           .split(",")
           .map((k) => k.trim())
-          .filter((k) => k && !/^key\d+$/.test(k))
+          .filter(Boolean)
       : []),
   ],
   canonicalUrl: absoluteUrl(`/portfolio/${slug}`),

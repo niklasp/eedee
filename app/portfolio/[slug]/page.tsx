@@ -178,6 +178,8 @@ export default async function PortfolioProject({
                 src={mainImage}
                 alt={`${project.title}: screenshot of ${project.projectLink.title}`}
                 placeholder="blur"
+                loading="eager"
+                fetchPriority="high"
                 sizes="(min-width: 1320px) 1280px, 100vw"
               />
             </div>

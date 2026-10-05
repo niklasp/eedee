@@ -184,6 +184,10 @@ h6 {
   animation-delay: calc(1s + var(--i) * 38ms);
 }
 
+.hero-pixel-ch::before {
+  content: attr(data-ch);
+}
+
 @keyframes hero-pixel-wave {
   0% {
     color: #fff;

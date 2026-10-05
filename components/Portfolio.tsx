@@ -109,7 +109,12 @@ const Portfolio = () => {
             className="swiper portfolio-slider overflow-visible mt-6 xl:mt-14 swiper-initialized swiper-horizontal swiper-backface-hidden"
           >
             {portfolioData.projects.map((project, idx) => (
-              <SwiperSlide key={idx}>
+              <SwiperSlide
+                key={idx}
+                // Same size and gap as Swiper sets once it runs, already in
+                // the server HTML, so the second slide doesn't jump in (CLS).
+                className="md:!w-[calc((100%-30px)/2)] md:mr-[30px] lg:!w-[calc((100%-50px)/2)] lg:mr-[50px]"
+              >
                 <div className="group/portfolio-box">
                   {/* Image */}
                   <div className="relative rounded-none">
@@ -121,6 +126,11 @@ const Portfolio = () => {
                         src={project.mainImage}
                         alt={project.title}
                         placeholder="blur"
+                        // The first slide is the LCP image (the intro is
+                        // short); later slides load lazily as usual.
+                        {...(idx === 0
+                          ? { loading: "eager" as const, fetchPriority: "high" as const }
+                          : {})}
                         sizes="(min-width: 1320px) 610px, (min-width: 768px) 50vw, 100vw"
                         className="group-hover:scale-105 transition ease-custom duration-500"
                       />
