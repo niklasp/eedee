@@ -47,7 +47,7 @@ export function organizationJsonLd() {
     image: absoluteUrl("/opengraph-image"),
     slogan: studioTagline,
     description: homeDescription,
-    email: "niklas@eedee.net",
+    email: "hello@eedee.net",
     founder: { "@id": founderId },
     sameAs: ["https://profiles.wordpress.org/eedee/"],
     knowsAbout: aboutData.skills.map((s) => s.name),

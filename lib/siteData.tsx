@@ -920,7 +920,7 @@ export const contactData = {
     title2: "Let's",
     title2Span: "Talk",
     phone: "+123 456 7890",
-    email: "niklas@eedee.net",
+    email: "hello@eedee.net",
   },
 };
 
