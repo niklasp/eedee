@@ -18,9 +18,6 @@ export default function Home() {
         {/* Hero */}
         <Hero />
 
-        {/* About */}
-        <About />
-
         {/* Services */}
         <Services />
 
@@ -33,6 +30,11 @@ export default function Home() {
 
       {/* Awards */}
       <Awards />
+
+      {/* About: the founder, after the work */}
+      <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5">
+        <About />
+      </div>
 
       {/* Testimonial */}
       {/* <Testimonial /> */}

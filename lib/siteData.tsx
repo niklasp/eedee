@@ -35,10 +35,6 @@ export const headerData = {
   logo: "eedee studio",
   navlinks: [
     {
-      url: "/#about",
-      title: "About",
-    },
-    {
       url: "/#services",
       title: "Services",
     },
@@ -49,6 +45,10 @@ export const headerData = {
     {
       url: "/#awards",
       title: "Awards",
+    },
+    {
+      url: "/#about",
+      title: "About",
     },
     // {
     //   url: "/#testimonial",
