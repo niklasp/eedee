@@ -9,6 +9,7 @@ import { Swiper as SwiperType } from "swiper";
 import { NavigationOptions } from "swiper/types";
 import { cn } from "@/lib/utils";
 import { fontIBMPlexMono } from "@/app/fonts";
+import { PortfolioBackground } from "@/components/portfolio-background";
 
 const Portfolio = () => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
@@ -37,8 +38,9 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div id="portfolio" className="px-5 lg:px-10">
-      <div className="bg-darkBg rounded-none overflow-hidden py-20">
+    <div id="portfolio" className="relative isolate overflow-hidden">
+      <PortfolioBackground />
+      <div className="py-20 xl:py-28">
         <div className="container mx-auto max-w-[1320px] px-5">
           <div className="md:w-4/5 lg:w-3/4 md:mx-auto">
             <p className="font-doto pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/50 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">

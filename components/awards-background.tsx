@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useNearViewport } from "@/components/use-near-viewport";
 
 // The WebGL mesh gradient behind the achievements: its code loads and the
 // shader starts only when the section comes near the viewport.
@@ -11,24 +11,7 @@ const MeshGradient = dynamic(
 );
 
 export function AwardsBackground() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || visible) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "600px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [visible]);
+  const [ref, visible] = useNearViewport<HTMLDivElement>();
 
   return (
     <div ref={ref} aria-hidden="true" className="absolute inset-0 -z-10">
