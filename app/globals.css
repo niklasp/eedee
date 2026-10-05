@@ -172,3 +172,72 @@ h5,
 h6 {
   @apply font-doto;
 }
+
+/*
+ * Hero headline: a colour wave runs through the letters. Each letter flips
+ * through the brand colours in crisp steps, like pixels lighting up, one
+ * after the other. CSS only; the text stays one text; still for reduced
+ * motion.
+ */
+.hero-pixel-ch {
+  animation: hero-pixel-wave 7s step-end infinite;
+  animation-delay: calc(1s + var(--i) * 38ms);
+}
+
+@keyframes hero-pixel-wave {
+  0% {
+    color: #fff;
+  }
+  1.5% {
+    color: #ff82f3;
+  }
+  3% {
+    color: #b44bff;
+  }
+  4.5% {
+    color: #7b13ff;
+  }
+  6% {
+    color: #ff82f3;
+  }
+  7.5%,
+  100% {
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pixel-ch {
+    animation: none;
+  }
+}
+
+/* Contact form: three pixels lighting up in turn while a message sends. */
+.send-pixel {
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  opacity: 0.25;
+  animation: send-pixel 0.9s step-end infinite;
+}
+
+@keyframes send-pixel {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  33% {
+    opacity: 1;
+    background: #ff82f3;
+  }
+  66% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .send-pixel {
+    animation: none;
+    opacity: 0.8;
+  }
+}

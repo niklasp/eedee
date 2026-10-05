@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import { contactData } from "@/lib/siteData";
 import { toast } from "sonner";
 
+/** A mailto link with the form's content, for when sending fails. */
+function mailtoFallback(f: { name: string; subject: string; message: string }) {
+  const subject = f.subject || `Hello from ${f.name || "eedee.net"}`;
+  const body = `${f.message}\n\n${f.name}`;
+  return `mailto:${contactData.mainData.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +46,9 @@ export default function Contact() {
         const { message } = await response
           .json()
           .catch(() => ({ message: "Something went wrong" }));
-        toast.error(message || "Something went wrong");
+        toast.error(message || "Something went wrong", {
+          description: "Use the email link below the form instead.",
+        });
       }
     } catch {
       setStatus("error");
@@ -138,32 +147,47 @@ export default function Contact() {
                 className={`inline-block relative group overflow-hidden bg-white/15 px-7 py-3 pr-11 rounded-3xl font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 after:content-[''] after:absolute after:top-1/2 after:right-[28px] after:-translate-y-1/2 after:bg-white after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7] ${status === "loading" ? "non-disabled" : ""}`}
                 type="submit"
                 disabled={status === "loading"}
+                aria-busy={status === "loading"}
               >
-                <span
-                  className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 group-hover:before:-top-full group-hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 group-hover:after:top-0 group-hover:after:opacity-100"
-                  data-text="Send Message"
-                >
-                  Send Message
-                </span>
+                {status === "loading" ? (
+                  <span className="flex items-center gap-3">
+                    Sending
+                    {/* Three pixels lighting up in turn. */}
+                    <span className="flex gap-[3px]" aria-hidden="true">
+                      <span className="send-pixel" />
+                      <span className="send-pixel [animation-delay:150ms]" />
+                      <span className="send-pixel [animation-delay:300ms]" />
+                    </span>
+                  </span>
+                ) : (
+                  <span
+                    className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 group-hover:before:-top-full group-hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 group-hover:after:top-0 group-hover:after:opacity-100"
+                    data-text="Send Message"
+                  >
+                    Send Message
+                  </span>
+                )}
               </button>
             </form>
-            {/* Submit result */}
-            <div className="submit-result">
+            {/* Submit result, announced to screen readers. */}
+            <div className="mt-4 min-h-6" aria-live="polite">
               {status === "success" && (
-                <span
-                  id="success"
-                  className="transition duration-200 ease-out text-green-700"
-                >
-                  Thank you! Your Message has been sent.
-                </span>
+                <p className="text-white/80">
+                  Thank you! Your message is on its way.
+                </p>
               )}
               {status === "error" && (
-                <span
-                  id="error"
-                  className="transition duration-200 ease-out text-red-600"
-                >
-                  Something went wrong. Please try again!
-                </span>
+                <p className="text-white/80">
+                  Sending didn’t work this time. Please{" "}
+                  <a
+                    className="underline text-[#ff82f3]"
+                    href={mailtoFallback(formData)}
+                  >
+                    email us directly
+                  </a>{" "}
+                  at {contactData.mainData.email}, your message is already
+                  filled in.
+                </p>
               )}
             </div>
           </div>
