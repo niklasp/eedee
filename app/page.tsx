@@ -15,18 +15,20 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdString(homeJsonLd()) }}
       />
       <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5">
-        {/* Hero */}
+        {/* Hero: the short intro */}
         <Hero />
+      </div>
 
+      {/* Portfolio: the projects right after the intro */}
+      <Portfolio />
+
+      <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5">
         {/* Services */}
         <Services />
 
         {/* Clients */}
         <Clients />
       </div>
-
-      {/* Portfolio */}
-      <Portfolio />
 
       {/* Awards */}
       <Awards />

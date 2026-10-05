@@ -7,22 +7,20 @@ import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
 import { doto } from "@/app/fonts";
 import { ParallaxAvatar } from "@/components/parallax-avatar";
+import { Mark } from "@/components/brand/Mark";
 
 const About = () => {
   return (
-    <div className="lg:flex space-y-8 lg:space-y-0">
-      {/* Hero Avatar */}
+    <div className="lg:flex py-24 xl:py-28 space-y-8 lg:space-y-0">
+      {/* The pixel e, floating with the scroll */}
       <div className="w-full lg:w-1/3 lg:order-2 text-center">
-        <ParallaxAvatar
-          src={aboutData.mainData.heroAvatar}
-          alt="Niklas Jurij Plessing"
-          placeholder="blur"
-          sizes="(min-width: 1280px) 200px, (min-width: 768px) 150px, 120px"
-          className="inline-block w-[120px] h-[120px] md:w-[150px] md:h-[150px] xl:w-[200px] xl:h-[200px] rounded-full mt-24"
-          maxTranslateY={80}
-        />
+        <ParallaxAvatar maxTranslateY={80}>
+          <Mark
+            title="eedee"
+            className="inline-block w-[120px] h-[120px] md:w-[150px] md:h-[150px] xl:w-[200px] xl:h-[200px] mt-24"
+          />
+        </ParallaxAvatar>
       </div>
-      {/* end Hero Avatar */}
       <div className="w-full lg:w-1/3 lg:order-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-8">
         <div>
           <h2 className="font-outfit font-medium tracking-wider uppercase text-sm text-white mb-2">
