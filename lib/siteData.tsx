@@ -19,6 +19,8 @@ import PortfolioDistrict from "@/public/projects/district.png";
 import PortfolioEsmalbesserhabenin from "@/public/projects/esmalbesserhabenin.png";
 import PortfolioGrayPaperLecture from "@/public/projects/gray-paper.png";
 import PortfolioR0GUE from "@/public/projects/r0gue.png";
+import PortfolioWispGallery from "@/public/projects/wisp-gallery.webp";
+import PortfolioGutenslider from "@/public/projects/gutenslider.webp";
 import Link from "next/link";
 
 import skillRust from "@/public/skills/rust.svg";
@@ -30,7 +32,7 @@ import skillNext from "@/public/skills/nextdotjs.svg";
 import skillFigma from "@/public/skills/figma.svg";
 
 export const headerData = {
-  logo: "Niklas Jurij Plessing",
+  logo: "eedee studio",
   navlinks: [
     {
       url: "/#about",
@@ -65,18 +67,18 @@ export const headerData = {
 
 export const aboutData = {
   mainData: {
-    name: "I ship outstanding and enjoyable interfaces and apps",
+    name: "We ship outstanding and enjoyable interfaces and apps",
     heroAvatar: HeroAvatar,
     biography: (
       <>
-        Senior Fullstack Web3 Developer with a passion for building innovative
-        solutions. Strong{" "}
+        eedee is run by Niklas Jurij Plessing, Senior Fullstack Web3 Developer
+        with a passion for building innovative solutions. Strong{" "}
         <span className="bg-themeGradient bg-clip-text text-transparent">
           {" frontend "}
         </span>{" "}
         focus. Master Degree in History of Science, Bachelor in Computer
         Science. Freelancing and building for creatives since 2005. Throwing
-        black clay espresso cups at the pottery wheel in my free time.
+        black clay espresso cups at the pottery wheel in his free time.
       </>
     ),
     projectsDone: "35+",
@@ -141,18 +143,22 @@ export const aboutData = {
   connect: [
     {
       url: "https://github.com/niklasp",
+      label: "GitHub",
       bootstrapIcon: "bi bi-github",
     },
     {
       url: "https://x.com/niftesty",
+      label: "X (Twitter)",
       bootstrapIcon: "bi bi-twitter-x",
     },
     {
       url: "https://t.me/niftesty",
+      label: "Telegram",
       bootstrapIcon: "bi bi-telegram",
     },
     {
       url: "https://www.linkedin.com/in/niklas-jurij-plessing-6b0295125",
+      label: "LinkedIn",
       bootstrapIcon: "bi bi-linkedin",
     },
   ],
@@ -161,7 +167,7 @@ export const aboutData = {
 export const servicesData = {
   mainData: {
     title: "Services",
-    title2: "What I",
+    title2: "What We",
     title2Span: "Do",
   },
   services: [
@@ -169,25 +175,25 @@ export const servicesData = {
       number: "01",
       title: "Software Development",
       description:
-        "I build web3 applications, from creative landing pages to complex dapps.",
+        "We build web3 applications and WordPress plugins, from creative landing pages to complex dapps.",
     },
     {
       number: "02",
       title: "Software Curation",
       description:
-        "I curate software, helping grants and bounties to be successful by selecting the most promising applications.",
+        "We curate software, helping grants and bounties to be successful by selecting the most promising applications.",
     },
     {
       number: "03",
       title: "UX Research",
       description:
-        "I research UX, helping teams to understand their users and improve their products and find the best solutions.",
+        "We research UX, helping teams to understand their users and improve their products and find the best solutions.",
     },
     {
       number: "04",
       title: "Project Management",
       description:
-        "I manage projects, spending time with teams to help them achieve their goals.",
+        "We manage projects, spending time with teams to help them achieve their goals.",
     },
   ],
 };
@@ -196,6 +202,7 @@ export const clientsData = {
   clients: [
     {
       url: "https://parity.io/",
+      label: "Parity Technologies",
       logo: (
         <svg
           width="127"
@@ -221,6 +228,7 @@ export const clientsData = {
     },
     {
       url: "https://web3.foundation/",
+      label: "Web3 Foundation",
       logo: (
         <svg viewBox="0 0 464 197.5" preserveAspectRatio="xMinYMid meet">
           <path
@@ -232,6 +240,7 @@ export const clientsData = {
     },
     {
       url: "https://braille.wtf/",
+      label: "Braille",
       logo: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -278,24 +287,29 @@ export const clientsData = {
           />
         </svg>
       ),
-      url: "r0gue.ui",
+      url: "https://r0gue.io",
+      label: "R0GUE",
     },
     {
       url: "https://use.ink/",
+      label: "ink!",
       logo: <Image src={LogoInk} alt="ink! logo" width={60} height={60} />,
     },
     {
       url: "https://hyperbridge.network",
+      label: "Hyperbridge",
       logo: (
         <Image src={LogoHyperbridge} alt="Hyperbridge" width={60} height={60} />
       ),
     },
     {
       url: "https://onpop.io/",
+      label: "Pop Network",
       logo: <Image src={LogoPop} alt="pop" width={60} height={60} />,
     },
     {
       url: "https://thekus.xyz/",
+      label: "The Kusamarian",
       logo: (
         <Image
           src={LogoKus}
@@ -309,6 +323,7 @@ export const clientsData = {
     },
     {
       url: "https://thewagmedia.com/",
+      label: "WagMedia",
       name: "WagMedia",
       logo: (
         <Image
@@ -330,22 +345,150 @@ export const portfolioData = {
     title2Span: "Work",
     description: (
       <>
-        Product-first web3: clear UX, strong engineering, measurable outcomes.{" "}
-        <br /> I get hands-on with teams to turn concepts into shipped dapps
+        Product-first web3 and WordPress: clear UX, strong engineering,
+        measurable outcomes. <br /> We get hands-on with teams to turn concepts
+        into shipped dapps, and we ship products of our own
       </>
     ),
   },
   projects: [
     {
+      title: "Wisp Gallery",
+      slug: "wisp-gallery",
+      description:
+        "Filterable galleries for the WordPress block editor. Five layouts, a category filter and a native lightbox, built on core blocks and the Interactivity API with 3 KB of JavaScript to start. Free on WordPress.org.",
+      keywords:
+        "wordpress plugin, filterable gallery, block editor, gutenberg, interactivity api, lightbox",
+      categories: [
+        { name: "WordPress" },
+        { name: "Block Editor" },
+        { name: "Interactivity API" },
+        { name: "PHP" },
+        { name: "React" },
+      ],
+      services: [
+        { name: "Product Design" },
+        { name: "Web Development" },
+        { name: "UX Design" },
+        { name: "Branding" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "wispgallery.com",
+        url: "https://wispgallery.com",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            Wisp Gallery is our own WordPress plugin, from the idea to the
+            release. It turns images, posts and pages into galleries that
+            visitors can filter by category, in five layouts: masonry,
+            justified rows, grid, carousel and accordion. The lightbox is a
+            native <code>&lt;dialog&gt;</code>, scroll reveal and hover effects
+            are pure CSS.
+          </p>
+          <p className="text-white/70">
+            It is built on core blocks and the Interactivity API. A gallery
+            starts with 3 KB of JavaScript and loads the rest only when it needs
+            it, with no jQuery or other dependencies. Importers bring over
+            galleries from Envira, NextGEN, Modula and FooGallery, and through
+            the Abilities API AI agents can list categories, tag images and
+            create galleries. It ships in seven languages.
+          </p>
+          <p className="text-white/70">
+            WordPress.org approved it in September 2026 and version 1.1.0
+            followed in October. It is{" "}
+            <Link
+              href="https://wordpress.org/plugins/wisp-gallery/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              free on WordPress.org
+            </Link>
+            . A separate Pro plugin, sold through Freemius, adds videos,
+            WooCommerce products, albums and load more.
+          </p>
+          <p className="text-white/70">
+            Besides the plugin we made the brand (an animated 5×5 tile logo
+            that spells W-I-S-P), the marketing site as a static WordPress
+            export on Cloudflare (Lighthouse 97 on mobile and 100 on desktop for
+            the home page) and the launch video.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioWispGallery,
+      trending: true,
+    },
+    {
+      title: "Gutenslider",
+      slug: "gutenslider",
+      description:
+        "A slider block for the WordPress block editor: images, videos or colors as slide backgrounds and any blocks on top. Version 7 rebuilt the front end on the Interactivity API.",
+      keywords:
+        "wordpress plugin, slider block, carousel, block editor, gutenberg, interactivity api, swiper",
+      categories: [
+        { name: "WordPress" },
+        { name: "Block Editor" },
+        { name: "Interactivity API" },
+        { name: "PHP" },
+        { name: "React" },
+      ],
+      services: [
+        { name: "Product Design" },
+        { name: "Web Development" },
+        { name: "UX Design" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2020",
+      projectLink: {
+        title: "gutenslider.org",
+        url: "https://gutenslider.org",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            When WordPress moved to the React based block editor, we built
+            Gutenslider as one of the first slider blocks inside it. Each slide
+            has a background (image, video, color or gradient) and holds any
+            blocks on top, so you design the slider right where you write the
+            content.
+          </p>
+          <p className="text-white/70">
+            Version 7 (September 2026) is a rebuild. The front end runs on the
+            Interactivity API without jQuery, Swiper loads only when a slider
+            comes near the viewport, the lightbox is a native{" "}
+            <code>&lt;dialog&gt;</code>, and the layout is rendered on the
+            server so nothing shifts. On the same test pages, mobile Lighthouse
+            went from 66–88 with 6.1.2 to 95–99, and layout shift from 0.52 to
+            0.
+          </p>
+          <p className="text-white/70">
+            Since 7.1 it also builds video sliders from YouTube videos and
+            playlists, and the current version, 7.2.0 (October 2026), can line
+            up a slide&apos;s blocks with the theme&apos;s content or wide width.
+            Pro, sold through Freemius, adds 3D and WebGL
+            transitions, scroll parallax and more pagination and lightbox
+            options. We also rebuilt{" "}
+            <Link
+              href="https://gutenslider.org/examples/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              gutenslider.org
+            </Link>{" "}
+            as a block theme that uses only core blocks and Gutenslider.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioGutenslider,
+      trending: true,
+    },
+    {
       title: "R0GUE",
       slug: "r0gue",
-      description: (
-        <p className="text-white/70">
-          R0GUE is a web3 agency that helps businesses build and scale their
-          web3 projects. I built the website from a figma design, adding motion
-          and shaders for a more enjoyable experience.
-        </p>
-      ),
+      description:
+        "R0GUE is a web3 agency that helps businesses build and scale their web3 projects. We built the website from a figma design, adding motion and shaders for a more enjoyable experience.",
       keywords: "next.js, tailwindcss, framer motion, shaders, figma",
       categories: [
         { name: "Next.js" },
@@ -369,7 +512,7 @@ export const portfolioData = {
         <p className="text-white/70">
           After several iterations in designs and discussions with the client,
           we settled on a design with shaders in the main heroes matching the
-          brand by distorting the R0GUE figure. I added controls for the client
+          brand by distorting the R0GUE figure. We added controls for the client
           so they can easily adjust the shaders to their liking.
         </p>
       ),
@@ -380,13 +523,8 @@ export const portfolioData = {
     {
       title: "Polkadot UI",
       slug: "polkadot-ui",
-      description: (
-        <p className="text-white/70">
-          Customizable React Component library for building Polkadot dapps. UX
-          optimized components build on shadcn registry with a custom cli and
-          MCP server.
-        </p>
-      ),
+      description:
+        "Customizable React Component library for building Polkadot dapps. UX optimized components build on shadcn registry with a custom cli and MCP server.",
       keywords: "key1, key2, key3",
       categories: [
         { name: "Next.js" },
@@ -399,17 +537,17 @@ export const portfolioData = {
         { name: "Project Management" },
       ],
       client: "UX Bounty",
-      duration: "300+ Hourse",
+      duration: "300+ hours",
       projectLink: {
         title: "polkadot.ui",
         url: "https://polkadot-ui.com",
       },
       content: (
         <p className="text-white/70">
-          After initial project scoping, I conducted a UX research phase to
-          understand the user needs and pain points. I then aligned with key
+          After initial project scoping, we conducted a UX research phase to
+          understand the user needs and pain points. We then aligned with key
           stakeholders in the ecosystem to ensure the design was aligned with
-          the needs of the community. I then designed the UI and implemented the
+          the needs of the community. We then designed the UI and implemented the
           functionality together with{" "}
           <Link
             href="https://www.linkedin.com/in/husni/"
@@ -448,7 +586,7 @@ export const portfolioData = {
         <p className="text-white/70">
           After aligning with the client,{" "}
           <Link href="https://flez.xyz/">flez</Link> created a full design
-          overhaul in framer motion, which I ported to react components as the
+          overhaul in framer motion, which we ported to react components as the
           clients requirement was open source and we had to include docusaurus
           and existing CI.
         </p>
@@ -734,25 +872,25 @@ export const awardsData = {
       title: "Open Source Grants Evaluator",
       date: "2025",
       description:
-        "I joined the Open Source Grants Evaluator program to help evaluate and fund open source projects that are building on the Polkadot ecosystem of up to $30.000.",
+        "Niklas joined the Open Source Grants Evaluator program to help evaluate and fund open source projects that are building on the Polkadot ecosystem of up to $30.000.",
     },
     {
       title: "UX Bounty Curator",
       date: "2025",
       description:
-        "As one of the best bounties in Polkadot, we are responsible for ensuring good UX in Polkadot and have started many successful initiatives. My focus is DevEx, Hackathons, Grants and helping with all things UX.",
+        "As one of the best bounties in Polkadot, we are responsible for ensuring good UX in Polkadot and have started many successful initiatives. Our focus is DevEx, Hackathons, Grants and helping with all things UX.",
     },
     {
       title: "PBA Graduate",
       date: "2021",
       description:
-        "As a student of the Polkadot Blockchain Academy in Buenos Aires, Argentina, I learned alot about the Polkadot ecosystem, studied RUST and ink! smart contracts, and built custom runtimes and pallets. It was before there was a dApp track and I was 1 of 2 building frontends at that time :)",
+        "As a student of the Polkadot Blockchain Academy in Buenos Aires, Argentina, Niklas learned a lot about the Polkadot ecosystem, studied RUST and ink! smart contracts, and built custom runtimes and pallets. It was before there was a dApp track and he was 1 of 2 building frontends at that time :)",
     },
     {
       title: "400k Downloads WP Plugin",
       date: "2021-2024",
       description:
-        "When WordPress switched to react based Gutenberg, I was one of the first to build a slider plugin within the native editor. It has ~400k downloads today (discontinued).",
+        "When WordPress switched to react based Gutenberg, we were one of the first to build a slider plugin within the native editor. It has ~400k downloads today (discontinued).",
     },
   ],
 };
@@ -787,5 +925,5 @@ export const contactData = {
 };
 
 export const footerData = {
-  copyWriteText: "Niklas Jurij Plessing, All Rights Reserved.",
+  copyWriteText: "studio · Niklas Jurij Plessing",
 };

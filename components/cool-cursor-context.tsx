@@ -5,11 +5,16 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 interface CoolCursorContextValue {
   coolcursor: boolean;
   setCoolcursor: (value: boolean) => void;
+  /** True once the 3D cursor is on screen (it loads lazily, after idle). */
+  sceneReady: boolean;
+  setSceneReady: (value: boolean) => void;
 }
 
 const CoolCursorContext = createContext<CoolCursorContextValue>({
   coolcursor: true,
   setCoolcursor: () => {},
+  sceneReady: false,
+  setSceneReady: () => {},
 });
 
 export function CoolCursorProvider({
@@ -23,6 +28,7 @@ export function CoolCursorProvider({
   const [prefersCoolcursor, setPrefersCoolcursor] =
     useState<boolean>(defaultOn);
   const [isSmall, setIsSmall] = useState<boolean>(false);
+  const [sceneReady, setSceneReady] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -54,7 +60,12 @@ export function CoolCursorProvider({
   const coolcursor = prefersCoolcursor && !isSmall;
   return (
     <CoolCursorContext.Provider
-      value={{ coolcursor, setCoolcursor: setPrefersCoolcursor }}
+      value={{
+        coolcursor,
+        setCoolcursor: setPrefersCoolcursor,
+        sceneReady,
+        setSceneReady,
+      }}
     >
       {children}
     </CoolCursorContext.Provider>

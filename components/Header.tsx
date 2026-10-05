@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { headerData } from "@/lib/siteData";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { useCoolCursor } from "@/components/cool-cursor-context";
 import { MousePointer } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -43,8 +44,17 @@ const Header = () => {
       <div className="container mx-auto max-w-[1600px] px-5 md:px-10">
         <div className="flex justify-between relative">
           {/* Header Logo */}
-          <div className="text-xxl font-bold text-white">
-            <Link href="/">{headerData.logo}</Link>
+          <div className="flex items-center">
+            <Link
+              href="/"
+              aria-label="eedee studio, home"
+              className="flex items-end gap-2 md:gap-2.5"
+            >
+              <Wordmark height={26} className="h-5 w-auto md:h-[26px]" />
+              <span className="text-[10px] md:text-[11px] leading-none uppercase tracking-[0.3em] text-white/60">
+                Studio
+              </span>
+            </Link>
           </div>
           {/* Header Nav */}
           <div>
@@ -58,6 +68,8 @@ const Header = () => {
                       : " bg-white/15 text-white"
                   )}
                   onClick={() => setCoolcursor(!coolcursor)}
+                  aria-label="Toggle 3D cursor"
+                  aria-pressed={coolcursor}
                 >
                   <MousePointer
                     className="size-4"
@@ -85,6 +97,8 @@ const Header = () => {
                 <button
                   type="button"
                   onClick={toggleMenu}
+                  aria-expanded={isMenuOpen}
+                  aria-label="Menu"
                   className="inline-block relative z-[1] overflow-hidden cursor-pointer group px-5 py-2.5 pr-[34px] bg-white text-black font-outfit rounded-none uppercase text-sm font-medium tracking-wider after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-black after:w-[5px] after:h-[5px] after:rounded-none after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7] cursor-link"
                 >
                   <span
@@ -109,7 +123,7 @@ const Header = () => {
                     href={item.url}
                     className="text-white block relative hover:pl-[26px] transition-all ease-out duration-300 group"
                   >
-                    <i className="bi bi-arrow-right absolute top-1/2 left-0 -translate-y-1/2 opacity-0 invisible transition-all ease-linear duration-100 group-hover:opacity-100 group-hover:visible"></i>
+                    <i aria-hidden="true" className="bi bi-arrow-right absolute top-1/2 left-0 -translate-y-1/2 opacity-0 invisible transition-all ease-linear duration-100 group-hover:opacity-100 group-hover:visible"></i>
                     {item.title}
                   </Link>
                 </li>

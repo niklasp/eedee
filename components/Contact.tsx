@@ -54,9 +54,9 @@ export default function Contact() {
     >
       <div className="w-full lg:flex space-y-6 lg:space-y-0">
         <div className="w-full lg:w-1/3">
-          <h6 className="pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/40 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
+          <p className="font-doto pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/50 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
             {contactData.mainData.title}
-          </h6>
+          </p>
           <h2 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mt-2">
             {contactData.mainData.title2}{" "}
             <span className="bg-themeGradient bg-clip-text text-transparent">
@@ -68,9 +68,9 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="flex">
             <div className="w-1/2">
-              <h6 className="font-outfit font-medium uppercase text-sm tracking-wider text-white mb-2">
+              <p className="font-doto font-outfit font-medium uppercase text-sm tracking-wider text-white mb-2">
                 Email:
-              </h6>
+              </p>
               <h3 className="font-outfit font-medium text-2xl lg:text-3xl text-white">
                 {contactData.mainData.email}
               </h3>
@@ -90,6 +90,8 @@ export default function Contact() {
                     className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
                     type="text"
                     id="name"
+                    aria-label="Name"
+                    autoComplete="name"
                     name="name"
                     placeholder="Name"
                     value={formData.name}
@@ -102,6 +104,8 @@ export default function Contact() {
                     className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
                     type="email"
                     id="email"
+                    aria-label="E-Mail"
+                    autoComplete="email"
                     name="email"
                     placeholder="E-Mail"
                     value={formData.email}
@@ -114,6 +118,7 @@ export default function Contact() {
                 className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 focus:outline-none"
                 type="text"
                 id="subject"
+                    aria-label="Subject"
                 name="subject"
                 placeholder="Subject"
                 value={formData.subject}
@@ -124,6 +129,7 @@ export default function Contact() {
                 className="w-full bg-darkBg px-5 py-4 rounded-none placeholder:text-white/40 text-white/70 h-[160px] focus:outline-none"
                 name="message"
                 id="message"
+                    aria-label="Message"
                 placeholder="Message"
                 value={formData.message}
                 onChange={handleChange}

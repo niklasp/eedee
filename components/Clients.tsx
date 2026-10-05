@@ -9,12 +9,13 @@ import { cn } from "@/lib/utils";
 const Clients = () => {
   return (
     <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5 text-white py-24">
-      <h2 className="text-7xl font-bold text-center">Teams I worked with</h2>
+      <h2 className="text-7xl font-bold text-center">Teams we worked with</h2>
       <div className="flex flex-row flex-wrap py-24 space-between justify-center gap-y-8">
         {clientsData.clients.map((client) => (
           <Link
             key={client.url}
             href={client.url}
+            aria-label={client.label}
             className="flex items-center justify-center gap-3 h-14 opacity-80 hover:opacity-100 transition-opacity w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
           >
             <span

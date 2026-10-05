@@ -10,15 +10,18 @@ const Services = () => {
       className="w-full lg:flex py-24 xl:py-28 space-y-6 lg:space-y-0"
     >
       <div className="w-full lg:w-1/3">
-        <h6 className="pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/40 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
-          {servicesData.mainData.title}
-        </h6>
-        <h2 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mt-2">
-          {servicesData.mainData.title2}{" "}
-          <span className="bg-themeGradient bg-clip-text text-transparent">
-            {servicesData.mainData.title2Span}
-          </span>
-        </h2>
+        {/* Stays in view while the service cards scroll past (desktop). */}
+        <div className="lg:sticky lg:top-32">
+          <p className="font-doto pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/50 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
+            {servicesData.mainData.title}
+          </p>
+          <h2 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mt-2">
+            {servicesData.mainData.title2}{" "}
+            <span className="bg-themeGradient bg-clip-text text-transparent">
+              {servicesData.mainData.title2Span}
+            </span>
+          </h2>
+        </div>
       </div>
       <div className="w-full lg:w-2/3 space-y-6">
         {servicesData.services.map((item, index) => (

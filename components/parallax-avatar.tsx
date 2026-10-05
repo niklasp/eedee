@@ -11,6 +11,7 @@ export function ParallaxAvatar({
   maxTranslateY = 40,
   maxScale = 1.1,
   placeholder,
+  sizes,
 }: ParallaxAvatarProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -66,6 +67,7 @@ export function ParallaxAvatar({
           src={src}
           alt={alt}
           placeholder={placeholder}
+          sizes={sizes}
           className={cn(className)}
         />
       </div>
@@ -80,4 +82,5 @@ interface ParallaxAvatarProps {
   maxTranslateY?: number;
   maxScale?: number;
   placeholder?: "blur" | "empty";
+  sizes?: string;
 }

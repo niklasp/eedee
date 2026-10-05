@@ -1,61 +1,57 @@
-interface SEOMetadata {
-  title: string;
-  description: string;
-  keywords: string[];
-  canonicalUrl: string;
-}
+export const siteUrl = "https://eedee.net";
+/** The studio. eedee.net presents eedee first, its founder second. */
+export const siteName = "eedee";
+export const studioTagline = "web, web3 and WordPress studio";
+export const founderName = "Niklas Jurij Plessing";
 
-interface PageSEO {
-  [key: string]: SEOMetadata;
-}
+export const homeTitle = `eedee, ${studioTagline}`;
+export const homeDescription =
+  "eedee is a studio for web3 apps, React interfaces and WordPress plugins, founded by Niklas Jurij Plessing. Recent work: Polkadot UI, ink!, R0GUE and Wisp Gallery.";
 
-const siteUrl = "http://localhost:3000";
+export const homeKeywords = [
+  "eedee",
+  "web studio",
+  "web3 development",
+  "frontend development",
+  "React",
+  "Next.js",
+  "Polkadot",
+  "WordPress plugins",
+  "block editor",
+  "UX design",
+  "Niklas Jurij Plessing",
+];
 
-export const seoData: PageSEO = {
-  home: {
-    title: "Niklas Jurij Plessing - Web3 Developer",
-    description: "Web3 Developer",
-    keywords: ["Web3", "Developer", "Web3 Developer"],
-    canonicalUrl: siteUrl,
-  },
-  contact: {
-    title: "Contact | Niklas Jurij Plessing",
-    description: "Get in touch with us for inquiries or support.",
-    keywords: ["contact", "support", "inquiries"],
-    canonicalUrl: `${siteUrl}/contact`,
-  },
-  blog: {
-    title: "Blog | Niklas Jurij Plessing",
-    description: "Read our latest articles and stay updated with our blog.",
-    keywords: ["blog", "articles", "news"],
-    canonicalUrl: `${siteUrl}/blog`,
-  },
-  portfolio: {
-    title: "Portfolio | Niklas Jurij Plessing",
-    description: "Explore our portfolio of projects and works.",
-    keywords: ["portfolio", "projects", "works"],
-    canonicalUrl: `${siteUrl}/portfolio`,
-  },
-};
+export const absoluteUrl = (path = "/") =>
+  `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 
 export const getPortfolioProjectSEO = (
-  id: string,
+  slug: string,
   title: string,
-  excerpt: string
-): SEOMetadata => ({
-  title: `${title} | Portfolio | Niklas Jurij Plessing`,
+  excerpt: string,
+  keywords?: string
+) => ({
+  title: `${title} | ${siteName}`,
   description: excerpt,
-  keywords: ["portfolio", "project", title.toLowerCase()],
-  canonicalUrl: `${siteUrl}/portfolio/${id}`,
+  keywords: [
+    title,
+    ...(keywords
+      ? keywords
+          .split(",")
+          .map((k) => k.trim())
+          .filter((k) => k && !/^key\d+$/.test(k))
+      : []),
+  ],
+  canonicalUrl: absoluteUrl(`/portfolio/${slug}`),
 });
 
 export const getBlogPostSEO = (
   slug: string,
   title: string,
   excerpt: string
-): SEOMetadata => ({
-  title: `${title} | Blog | Niklas Jurij Plessing`,
+) => ({
+  title: `${title} | Blog | ${siteName}`,
   description: excerpt,
   keywords: ["blog", "article", ...title.toLowerCase().split(" ")],
-  canonicalUrl: `${siteUrl}/blog/${slug}`,
+  canonicalUrl: absoluteUrl(`/blog/${slug}`),
 });

@@ -27,6 +27,8 @@ export async function generateMetadata({
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
+    // The blog only holds placeholder posts for now.
+    robots: { index: false, follow: true },
     openGraph: {
       title: seo.title,
       description: seo.description,

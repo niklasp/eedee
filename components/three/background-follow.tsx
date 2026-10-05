@@ -145,6 +145,13 @@ function Cursor({
   };
   const meshRef = useRef<ThreeMesh | null>(null);
   const groupRef = useRef<Group | null>(null);
+  const { setSceneReady } = useCoolCursor();
+
+  // The model is loaded and mounted: now the system cursor may be hidden.
+  useEffect(() => {
+    setSceneReady(true);
+    return () => setSceneReady(false);
+  }, [setSceneReady]);
 
   const baseScaleRef = useRef(
     new Vector3(

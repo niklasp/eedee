@@ -1,10 +1,18 @@
 import { portfolioData } from "@/lib/siteData";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getPortfolioProjectSEO } from "@/lib/seoData";
+import { getPortfolioProjectSEO, siteName } from "@/lib/seoData";
+import { jsonLdString, projectJsonLd } from "@/lib/structuredData";
 import { Metadata } from "next";
 import GalleryWrapper from "@/components/GalleryWrapper";
 import Link from "next/link";
+
+// Every project page is prerendered at build time; unknown slugs are 404s.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return portfolioData.projects.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({
   params,
@@ -17,27 +25,33 @@ export async function generateMetadata({
   if (!project) {
     return {
       title: "Project Not Found",
-      description: "The requested blog project could not be found",
+      description: "The requested project could not be found",
     };
   }
 
   const seo = getPortfolioProjectSEO(
     slug,
     project.title,
-    project.description as string
+    project.description,
+    project.keywords
   );
 
   return {
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
+    alternates: { canonical: seo.canonicalUrl },
     openGraph: {
       title: seo.title,
       description: seo.description,
       type: "article",
+      url: seo.canonicalUrl,
+      siteName,
+      authors: [siteName],
     },
     twitter: {
       card: "summary_large_image",
+      site: "@niftesty",
       title: seo.title,
       description: seo.description,
     },
@@ -83,15 +97,19 @@ export default async function PortfolioProject({
 
   return (
     <GalleryWrapper>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(projectJsonLd(project)) }}
+      />
       <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5">
         <div className="py-24 xl:py-28">
           <div className="md:mx-auto md:w-3/4 lg:w-2/3">
-            <h2 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+            <h1 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mb-4">
               {project.title.replace(lastWord, "")}{" "}
               <span className="bg-themeGradient bg-clip-text text-transparent">
                 {lastWord}
               </span>
-            </h2>
+            </h1>
             <p className="text-white/70">{project.description}</p>
           </div>
           {/*  Project Info */}
@@ -124,6 +142,8 @@ export default async function PortfolioProject({
               <Link
                 className="inline-block overflow-hidden"
                 href={project.projectLink.url}
+                target="_blank"
+                rel="noopener"
               >
                 <span
                   className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 hover:before:-top-full hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 hover:after:top-0 hover:after:opacity-100"
@@ -147,14 +167,18 @@ export default async function PortfolioProject({
       {/* Project Details */}
       <div className="px-5 lg:px-10">
         <div className="container mx-auto max-w-[1320px] px-5">
-          <div className="md:mx-auto md:w-3/4 lg:w-2/3">{project.content}</div>
+          <div className="md:mx-auto md:w-3/4 lg:w-2/3 [&_p+p]:mt-4 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-white">
+            {project.content}
+          </div>
 
           {mainImage && (
             <div className="mt-6 lg:mt-12">
               <Image
                 className="rounded-none"
                 src={mainImage}
-                alt={project.title}
+                alt={`${project.title}: screenshot of ${project.projectLink.title}`}
+                placeholder="blur"
+                sizes="(min-width: 1320px) 1280px, 100vw"
               />
             </div>
           )}
@@ -225,7 +249,7 @@ export default async function PortfolioProject({
             {/* Prev */}
             {prevProject ? (
               <Link
-                href={`/portfolio/${nextProject?.slug}`}
+                href={`/portfolio/${prevProject.slug}`}
                 className="inline-block relative z-[1] group overflow-hidden bg-white/15 px-7 py-3 rounded-none font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100"
               >
                 <span
@@ -249,7 +273,7 @@ export default async function PortfolioProject({
             {/* Next */}
             {nextProject ? (
               <Link
-                href={`/portfolio/${prevProject?.slug}`}
+                href={`/portfolio/${nextProject.slug}`}
                 className="inline-block relative z-[1] group overflow-hidden bg-white/15 px-7 py-3 rounded-none font-outfit font-medium uppercase text-sm tracking-wider text-white before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100"
               >
                 <span

@@ -41,9 +41,9 @@ const Portfolio = () => {
       <div className="bg-darkBg rounded-none overflow-hidden py-20">
         <div className="container mx-auto max-w-[1320px] px-5">
           <div className="md:w-4/5 lg:w-3/4 md:mx-auto">
-            <h6 className="pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/40 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
+            <p className="font-doto pl-[20px] relative font-outfit font-medium text-sm uppercase tracking-wider text-white/50 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[12px] before:h-[12px] before:rounded-none before:border-2 before:border-white/30">
               {portfolioData.mainData.title}
-            </h6>
+            </p>
             <h2 className="font-outfit font-medium text-4xl md:text-5xl lg:text-6xl text-white mt-2">
               {portfolioData.mainData.title2}{" "}
               <span className="bg-themeGradient bg-clip-text text-transparent">
@@ -65,16 +65,16 @@ const Portfolio = () => {
                 onClick={() => sliderRef.current?.slidePrev()}
                 aria-label="Prev Slide"
               >
-                <i className="bi bi-arrow-left absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 group-hover:top-0 group-hover:invisible group-hover:opacity-0"></i>
-                <i className="bi bi-arrow-left absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 invisible opacity-0 group-hover:top-1/2 group-hover:visible group-hover:opacity-100"></i>
+                <i aria-hidden="true" className="bi bi-arrow-left absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 group-hover:top-0 group-hover:invisible group-hover:opacity-0"></i>
+                <i aria-hidden="true" className="bi bi-arrow-left absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 invisible opacity-0 group-hover:top-1/2 group-hover:visible group-hover:opacity-100"></i>
               </button>
               <button
                 className="swiper-portfolio-next inline-block group w-[50px] h-[50px] rounded-none cursor-pointer bg-white/15 text-white relative z-[1] overflow-hidden before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 cursor-link"
                 onClick={() => sliderRef.current?.slideNext()}
                 aria-label="Next Slide"
               >
-                <i className="bi bi-arrow-right absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 group-hover:top-0 group-hover:invisible group-hover:opacity-0"></i>
-                <i className="bi bi-arrow-right absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 invisible opacity-0 group-hover:top-1/2 group-hover:visible group-hover:opacity-100"></i>
+                <i aria-hidden="true" className="bi bi-arrow-right absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 group-hover:top-0 group-hover:invisible group-hover:opacity-0"></i>
+                <i aria-hidden="true" className="bi bi-arrow-right absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-out duration-200 invisible opacity-0 group-hover:top-1/2 group-hover:visible group-hover:opacity-100"></i>
               </button>
             </div>
             {/* end Slider Nav */}
@@ -114,13 +114,14 @@ const Portfolio = () => {
                   {/* Image */}
                   <div className="relative rounded-none">
                     <Link
-                      href={`portfolio/${project.slug}`}
+                      href={`/portfolio/${project.slug}`}
                       className="group block relative before:content-[''] before:z-[1] before:absolute before:top-0 before:left-0 before:w-full before:scale-105 before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-10 before:transition-all before:ease-linear before:duration-100"
                     >
                       <Image
                         src={project.mainImage}
                         alt={project.title}
                         placeholder="blur"
+                        sizes="(min-width: 1320px) 610px, (min-width: 768px) 50vw, 100vw"
                         className="group-hover:scale-105 transition ease-custom duration-500"
                       />
                     </Link>
@@ -139,7 +140,7 @@ const Portfolio = () => {
                         >
                           <Link
                             className="inline-block overflow-hidden"
-                            href={`portfolio/${project.slug}`}
+                            href={`/portfolio/${project.slug}`}
                           >
                             <span
                               className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 hover:before:-top-full hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 hover:after:top-0 hover:after:opacity-100"
@@ -153,17 +154,17 @@ const Portfolio = () => {
                     </ul>
                     {/* Caption */}
                     <div className="mt-2">
-                      <h2 className="relative font-outfit font-medium text-3xl">
+                      <h3 className="relative font-outfit font-medium text-3xl">
                         <Link
                           className="text-white group-hover/portfolio-box:pl-[44px] transition-all ease-out duration-200"
-                          href={`portfolio/${project.slug}`}
+                          href={`/portfolio/${project.slug}`}
                         >
                           <span className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 opacity-0 group-hover/portfolio-box:opacity-100 group-hover/portfolio-box:-translate-x-0 transition duration-100">
-                            <i className="bi bi-arrow-right"></i>
+                            <i aria-hidden="true" className="bi bi-arrow-right"></i>
                           </span>
                           {project.title}
                         </Link>
-                      </h2>
+                      </h3>
                     </div>
                   </div>
                 </div>

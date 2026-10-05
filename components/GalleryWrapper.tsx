@@ -1,27 +1,30 @@
 "use client";
 
-import { useEffect, ReactNode } from 'react';
-import GLightbox from 'glightbox';
+import { useEffect, ReactNode } from "react";
 
 interface GalleryWrapperProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
+// glightbox touches `window` when its module is evaluated, so it must never be
+// imported on the server. It (and its CSS) is loaded only on pages that have
+// `.glightbox` links.
 function GalleryWrapper({ children }: GalleryWrapperProps) {
-    useEffect(() => {
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            autoplayVideos: true,
-        });
+  useEffect(() => {
+    if (!document.querySelector(".glightbox")) return;
+    let lightbox: { destroy: () => void } | undefined;
+    let cancelled = false;
+    import("./glightbox-init").then(({ initGlightbox }) => {
+      if (!cancelled) lightbox = initGlightbox();
+    });
 
-        return () => {
-            lightbox.destroy();
-        };
-    }, []);
+    return () => {
+      cancelled = true;
+      lightbox?.destroy();
+    };
+  }, []);
 
-    return <>{children}</>;
+  return <>{children}</>;
 }
 
 export default GalleryWrapper;
