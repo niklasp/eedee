@@ -24,6 +24,12 @@ const wpOrgSlug = (project: Project) =>
     ? project.wpOrgSlug
     : undefined;
 
+/** The npm package, for own libraries published there. */
+const npmPackage = (project: Project) =>
+  "npmPackage" in project && typeof project.npmPackage === "string"
+    ? project.npmPackage
+    : undefined;
+
 export function founderJsonLd() {
   return {
     "@type": "Person",
@@ -104,20 +110,24 @@ export function projectJsonLd(project: Project) {
       ? project.client
       : undefined;
   const slug = wpOrgSlug(project);
+  const npm = npmPackage(project);
   const main = isOwnProduct(project)
     ? {
         "@type": "SoftwareApplication",
         ...common,
         applicationCategory: "DeveloperApplication",
-        applicationSubCategory: "WordPress plugin",
-        operatingSystem: "WordPress",
+        applicationSubCategory: npm ? "JavaScript library" : "WordPress plugin",
+        operatingSystem: npm ? "Web browser" : "WordPress",
         author: { "@id": orgId },
         publisher: { "@id": orgId },
-        // Both plugins have a free version. No aggregateRating/review here:
-        // add them only once there are real ratings to show.
+        // Every own product has a free version. No aggregateRating/review
+        // here: add them only once there are real ratings to show.
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         ...(slug
           ? { downloadUrl: `https://wordpress.org/plugins/${slug}/` }
+          : {}),
+        ...(npm
+          ? { downloadUrl: `https://www.npmjs.com/package/${npm}` }
           : {}),
       }
     : {

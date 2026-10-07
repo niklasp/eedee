@@ -21,6 +21,7 @@ import PortfolioGrayPaperLecture from "@/public/projects/gray-paper.png";
 import PortfolioR0GUE from "@/public/projects/r0gue.png";
 import PortfolioWispGallery from "@/public/projects/wisp-gallery.webp";
 import PortfolioGutenslider from "@/public/projects/gutenslider.webp";
+import PortfolioGpuslider from "@/public/projects/gpuslider.webp";
 import Link from "next/link";
 
 import skillRust from "@/public/skills/rust.svg";
@@ -353,6 +354,76 @@ export const portfolioData = {
   },
   projects: [
     {
+      title: "gpuslider",
+      slug: "gpuslider",
+      // eedee's own open source library, on npm under this name.
+      ownProduct: true,
+      npmPackage: "gpuslider",
+      description:
+        "An image and video slider for the web, drawn on the GPU with WebGPU, or WebGL 2 where there is none. A 4.7 KB core without dependencies, 25 effects and 24 transitions of a few hundred bytes each. Open source on npm.",
+      keywords:
+        "webgpu, webgl, shaders, slider, carousel, typescript, open source, npm",
+      categories: [
+        { name: "WebGPU" },
+        { name: "WebGL" },
+        { name: "Shaders" },
+        { name: "TypeScript" },
+        { name: "Open Source" },
+      ],
+      services: [
+        { name: "Product Design" },
+        { name: "Web Development" },
+        { name: "UX Design" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "gpuslider.com",
+        url: "https://gpuslider.com",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            gpuslider is our own slider library. The slides are ordinary HTML
+            that works without the script; with it, a canvas draws them with
+            shaders, through WebGPU where the browser has it and WebGL 2 where
+            not. The canvas is made at the first sign of use, so a page loads
+            no shader before a visitor touches the slider.
+          </p>
+          <p className="text-white/70">
+            The core is 4.7 KB and moves, measures, drags and loops the slides;
+            everything else is a plugin. Effects such as stretch, a loupe that
+            crosses the gaps between slides, or covers and fans that leave the
+            slider are a few hundred bytes each, and every size has a budget
+            the build checks. Tests compare the shaders with the same maths in
+            JavaScript to a hundredth of a pixel, in both APIs.
+          </p>
+          <p className="text-white/70">
+            Version 1.0 came out in September 2026, 1.2 in October. It is free
+            on{" "}
+            <Link
+              href="https://www.npmjs.com/package/gpuslider"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              npm
+            </Link>
+            , with React bindings, a lightbox, and{" "}
+            <Link
+              href="https://gpuslider.com/playground/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              a playground
+            </Link>{" "}
+            to try every effect.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioGpuslider,
+      trending: true,
+    },
+    {
       title: "Wisp Gallery",
       slug: "wisp-gallery",
       // eedee's own plugin; free download on WordPress.org under this slug.
@@ -424,6 +495,42 @@ export const portfolioData = {
       trending: true,
     },
     {
+      title: "R0GUE",
+      slug: "r0gue",
+      description:
+        "R0GUE is a web3 agency that helps businesses build and scale their web3 projects. We built the website from a figma design, adding motion and shaders for a more enjoyable experience.",
+      keywords: "next.js, tailwindcss, framer motion, shaders, figma",
+      categories: [
+        { name: "Next.js" },
+        { name: "Tailwind CSS" },
+        { name: "Framer Motion" },
+        { name: "Shaders" },
+        { name: "Figma" },
+      ],
+      services: [
+        { name: "Web Development" },
+        { name: "UX Design" },
+        { name: "Project Management" },
+      ],
+      client: "R0GUE",
+      duration: "100+ hours",
+      projectLink: {
+        title: "r0gue.io",
+        url: "https://r0gue.io",
+      },
+      content: (
+        <p className="text-white/70">
+          After several iterations in designs and discussions with the client,
+          we settled on a design with shaders in the main heroes matching the
+          brand by distorting the R0GUE figure. We added controls for the client
+          so they can easily adjust the shaders to their liking.
+        </p>
+      ),
+      mainImage: PortfolioR0GUE,
+      trending: true,
+    },
+
+    {
       title: "Gutenslider",
       slug: "gutenslider",
       // eedee's own plugin. Not on WordPress.org right now (closed there
@@ -490,42 +597,6 @@ export const portfolioData = {
       mainImage: PortfolioGutenslider,
       trending: true,
     },
-    {
-      title: "R0GUE",
-      slug: "r0gue",
-      description:
-        "R0GUE is a web3 agency that helps businesses build and scale their web3 projects. We built the website from a figma design, adding motion and shaders for a more enjoyable experience.",
-      keywords: "next.js, tailwindcss, framer motion, shaders, figma",
-      categories: [
-        { name: "Next.js" },
-        { name: "Tailwind CSS" },
-        { name: "Framer Motion" },
-        { name: "Shaders" },
-        { name: "Figma" },
-      ],
-      services: [
-        { name: "Web Development" },
-        { name: "UX Design" },
-        { name: "Project Management" },
-      ],
-      client: "R0GUE",
-      duration: "100+ hours",
-      projectLink: {
-        title: "r0gue.io",
-        url: "https://r0gue.io",
-      },
-      content: (
-        <p className="text-white/70">
-          After several iterations in designs and discussions with the client,
-          we settled on a design with shaders in the main heroes matching the
-          brand by distorting the R0GUE figure. We added controls for the client
-          so they can easily adjust the shaders to their liking.
-        </p>
-      ),
-      mainImage: PortfolioR0GUE,
-      trending: true,
-    },
-
     {
       title: "Polkadot UI",
       slug: "polkadot-ui",
