@@ -22,6 +22,10 @@ import PortfolioR0GUE from "@/public/projects/r0gue.png";
 import PortfolioWispGallery from "@/public/projects/wisp-gallery.webp";
 import PortfolioGutenslider from "@/public/projects/gutenslider.webp";
 import PortfolioGpuslider from "@/public/projects/gpuslider.webp";
+import PortfolioLogoanimator from "@/public/projects/logoanimator.png";
+import Portfolio7oops from "@/public/projects/7oops.jpg";
+import PortfolioCatacrawl from "@/public/projects/catacrawl.png";
+import PortfolioWishlistme from "@/public/projects/wishlistme.png";
 import Link from "next/link";
 
 import skillRust from "@/public/skills/rust.svg";
@@ -596,6 +600,163 @@ export const portfolioData = {
       ),
       mainImage: PortfolioGutenslider,
       trending: true,
+    },
+    {
+      title: "LogoAnimator",
+      slug: "logoanimator",
+      ownProduct: true,
+      description:
+        "Upload a logo and export it as an animated dot-matrix SVG, right in the browser, with no signup and no design tools.",
+      keywords: "logo animation, animated svg, dot matrix, browser tool, saas",
+      categories: [{ name: "SVG" }, { name: "Animation" }, { name: "SaaS" }],
+      services: [
+        { name: "Product Design" },
+        { name: "Web Development" },
+        { name: "UX Design" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "logoanimator.app",
+        url: "https://logoanimator.app",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            LogoAnimator is our own browser tool. Upload a logo and it comes
+            back as a living dot-matrix display, ready to export as an animated
+            SVG in seconds. It needs no signup and no design tools.
+          </p>
+          <p className="text-white/70">
+            There is a free plan, with Pro from $5 a month or $29 for life.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioLogoanimator,
+    },
+    {
+      title: "7oops",
+      slug: "7oops",
+      ownProduct: true,
+      description:
+        "A looper, sampler and effects instrument for Android: sample anything, loop it and warp it with low-latency effects.",
+      keywords:
+        "android audio, looper, sampler, effects, oboe, jetpack compose, dsp",
+      categories: [{ name: "Android" }, { name: "Audio" }, { name: "C++" }],
+      services: [
+        { name: "Product Design" },
+        { name: "App Development" },
+        { name: "UX Design" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "7oops.app",
+        url: "https://7oops.app",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            7oops is our own audio instrument for Android: sample anything, loop
+            it and warp it with 8 effect buses, a granular flock, 165 modulatable
+            knobs and 85 real-tuned scales.
+          </p>
+          <p className="text-white/70">
+            The sound runs on a C++ DSP engine with low-latency audio through
+            Oboe, and the interface is built in Jetpack Compose.
+          </p>
+        </>
+      ),
+      mainImage: Portfolio7oops,
+    },
+    {
+      title: "Catacrawl",
+      slug: "catacrawl",
+      ownProduct: true,
+      description:
+        "A fast 2D action roguelike about cats and a horde that never stops, coming to Steam in Early Access.",
+      keywords: "roguelike, indie game, steam, love2d, lua, game development",
+      categories: [{ name: "Game" }, { name: "LÖVE" }, { name: "Lua" }],
+      services: [
+        { name: "Game Design" },
+        { name: "Game Development" },
+        { name: "Art Direction" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "catacrawl.com",
+        url: "https://catacrawl.com",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            Catacrawl is our own game: three cats with a bow, a spellbook and an
+            axe, nine skill trees and runs of ten to fourteen minutes, with two
+            bosses a stage, quests, loot, boons and public leaderboards.
+          </p>
+          <p className="text-white/70">
+            It is written in Lua on the LÖVE engine, for Windows, macOS and
+            Linux, and is coming to Steam in paid Early Access. The store page
+            is{" "}
+            <Link
+              href="https://store.steampowered.com/app/5188190/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline"
+            >
+              live on Steam
+            </Link>
+            .
+          </p>
+        </>
+      ),
+      mainImage: PortfolioCatacrawl,
+    },
+    {
+      title: "Wishlistme",
+      slug: "wishlistme",
+      ownProduct: true,
+      description:
+        "A marketplace where Steam game developers post jobs and creators get paid for every real wishlist they bring in.",
+      keywords: "steam wishlists, indie game marketing, creators, marketplace",
+      categories: [
+        { name: "Marketplace" },
+        { name: "Games" },
+        { name: "SaaS" },
+      ],
+      services: [
+        { name: "Product Design" },
+        { name: "Web Development" },
+        { name: "UX Design" },
+      ],
+      client: "eedee (own product)",
+      duration: "Since 2026",
+      projectLink: {
+        title: "wishlistme.me",
+        url: "https://wishlistme.me",
+      },
+      content: (
+        <>
+          <p className="text-white/70">
+            Wishlistme connects Steam game developers with creators. A developer
+            posts a job with a price per wishlist, creators on YouTube, Twitch,
+            TikTok and curator pages claim a slot and share their link, and they
+            get paid for each real wishlist.
+          </p>
+          <p className="text-white/70">
+            Our own game,{" "}
+            <Link
+              href="/portfolio/catacrawl"
+              className="text-white underline"
+            >
+              Catacrawl
+            </Link>
+            , runs real jobs on it.
+          </p>
+        </>
+      ),
+      mainImage: PortfolioWishlistme,
     },
     {
       title: "Polkadot UI",
